@@ -68,7 +68,7 @@ return [
             'root' => env('OLDNEWS_MOUNT'),
             'negatives_to_convert' => env('OLDNEWS_MOUNT') . env('NEGATIVES_TIF_CONVERT'),
             'negatives_completed_tifs' => env('OLDNEWS_MOUNT') . env('NEGATIVES_TIF_COMPLETE'),
-            'jpg_completed' => env('OLDNEWS_MOUNT') . env('NEGATIVES_JPG_COMPLETE'),
+            'negatives_jpg_completed' => env('OLDNEWS_MOUNT') . env('NEGATIVES_JPG_COMPLETE'),
         ],
 
     ],

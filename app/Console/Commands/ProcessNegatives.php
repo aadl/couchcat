@@ -43,7 +43,7 @@ class ProcessNegatives extends Command
         $oldnews_mount = config('filesystems.disks.oldnews.root');
         $tif_for_conversion = config('filesystems.disks.oldnews.negatives_to_convert');
         $completed_tifs = config('filesystems.disks.oldnews.negatives_completed_tifs');
-        $jpg_folder = config('filesystems.disks.oldnews.jpg_completed');
+        $jpg_folder = config('filesystems.disks.oldnews.negatives_jpg_completed');
 
         if (!File::exists($tif_for_conversion)) {
             $this->error('Oldnews Mount Is Missing');
