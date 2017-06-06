@@ -15,3 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('license', 'LicenseController');
+Route::resource('vendor', 'VendorController');

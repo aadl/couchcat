@@ -2,6 +2,7 @@
 
 namespace Couchcat\Http\Controllers;
 
+use Cache;
 use Couchcat\Vendor;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class VendorController extends Controller
      */
     public function index()
     {
-        //
+        $vendors = Cache::rememberForever('vendors', function () {
+            return Vendor::orderBy('name','dsc')->get();
+        });
+        return view('vendor.index',compact('vendors'));
     }
 
     /**
