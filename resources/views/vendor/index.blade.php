@@ -17,8 +17,8 @@
 	@foreach($vendors as $vendor)
 		<tr>
 			<td class='td-3'><a href="{{ route('vendor.show',['id' => $vendor['id']]) }}">{{ $vendor['name'] }}</a></td>
-			<td class='td-3'></td>
-			<td class='td-2'></td>
+			<td class='td-3'>{{ $vendor['contact_name'] }}</td>
+			<td class='td-2'>{{ $vendor['contact_email'] }}</td>
 			<td class='td-2'>{{ $vendor['updated_at'] }}</td>
 			<td class='td-1'><a href="{{ route('vendor.edit',['id' => $vendor['id']]) }}">Edit</a></td>
 		</tr>
