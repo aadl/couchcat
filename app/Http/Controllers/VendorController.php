@@ -5,6 +5,7 @@ namespace Couchcat\Http\Controllers;
 use Cache;
 use Couchcat\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class VendorController extends Controller
 {
@@ -39,7 +40,15 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:vendors',
+            'contact_email' => 'nullable|email'
+        ]);
+        $vendor = new Vendor;
+        $input = $request->all();
+        $vendor->fill($input)->save();
+        Cache::forget('vendors');
+        return redirect('vendor');
     }
 
     /**
@@ -50,7 +59,7 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        //
+        return view('vendor.show', compact('vendor'));
     }
 
     /**
@@ -61,7 +70,7 @@ class VendorController extends Controller
      */
     public function edit(Vendor $vendor)
     {
-        //
+        return view('vendor.edit', compact('vendor'));
     }
 
     /**
@@ -73,7 +82,14 @@ class VendorController extends Controller
      */
     public function update(Request $request, Vendor $vendor)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required',Rule::unique('vendors')->ignore($vendor->id)],
+            'contact_email' => 'nullable|email'
+        ]);
+        $input = $request->all();
+        $vendor->fill($input)->save();
+        Cache::forget('vendors');
+        return redirect('vendor');
     }
 
     /**
@@ -84,6 +100,8 @@ class VendorController extends Controller
      */
     public function destroy(Vendor $vendor)
     {
-        //
+        $vendor->delete();
+        Cache::forget('vendors');
+        return redirect('vendor');
     }
 }
