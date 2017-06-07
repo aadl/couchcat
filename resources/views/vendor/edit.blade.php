@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add a Vendor')
+@section('title', 'Vendor')
 
 @section('content')
 @if (count($errors) > 0)
@@ -12,17 +12,13 @@
         </ul>
     </div>
 @endif
-
-{{ Form::open(array('route' => 'vendor.store')) }}
-
+{{ Form::model($vendor, ['route' => ['vendor.update', $vendor->id], 'method' => 'PATCH']) }}
 {{ Form::label('name', 'Vendor Name') }}
 {{ Form::text('name') }}
 {{ Form::label('contact_name', 'Contact Name') }}
 {{ Form::text('contact_name') }}
 {{ Form::label('contact_email', 'Contact Email') }}
 {{ Form::text('contact_email') }}
-{{ Form::submit('Add Vendor') }}
-
+{{ Form::submit('Update Vendor') }}
 {{ Form::close() }}
-
 @endsection
