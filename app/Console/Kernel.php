@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\AwsInvalidate::class,
         Commands\CouchdbViews::class,
         Commands\LoadFlac::class,
         Commands\ProcessNegatives::class,
