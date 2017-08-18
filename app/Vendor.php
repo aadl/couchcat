@@ -10,6 +10,6 @@ class Vendor extends Model
     
     public function licenses()
     {
-        $this->hasMany('Couchcat\License');
+        $this->hasMany(\Couchcat\License::class);
     }
 }
