@@ -13,7 +13,6 @@
         "comodojo/zip": "^2.1",
         "intervention/image": "^2.3",
         "laravel/framework": "dev-master",
-        "laravelcollective/html": "5.4.*",
         "php-ffmpeg/php-ffmpeg": "^0.9.2",
         "php-on-couch/php-on-couch": "^2.0",
         "predis/predis": "^1.1",

@@ -167,8 +167,6 @@ return [
          * Package Service Providers...
          */
         Aws\Laravel\AwsServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Laravel\Tinker\TinkerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         
         /*
