@@ -40,7 +40,7 @@ class CouchdbViews extends Command
     {
         $couch = resolve('Couchdb');
         try {
-            $view_by_license = $couch->stale('ok')->limit(1)->getView('couchcat','by_licensed_from');
+            $view_by_license = $couch->stale('ok')->limit(1)->getView('couchcat', 'by_licensed_from');
         } catch (Exception $e) {
             if ($e->getCode() == 404) {
                 $this->info('Creating Licensee View');

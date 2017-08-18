@@ -53,11 +53,11 @@ class LoadFlac extends Command
         $doc->licenced_from = 'qsr';
 
         $files = Storage::allFiles('music/'.$directory .'/flac');
-        foreach($files as $file){
+        foreach ($files as $file) {
             $ffprobe = \FFMpeg\FFProbe::create();
             $parsepath = pathinfo($file);
             $filename = $parsepath['filename'];
-            if(!starts_with($filename, '.') && $parsepath['extension'] == 'flac') {
+            if (!starts_with($filename, '.') && $parsepath['extension'] == 'flac') {
                 $length = $ffprobe->format(storage_path('app/'.$file))->get('duration');
                 $tracknum = (int)substr($filename, 0, 2);
                 $trackname = substr($filename, 3);
@@ -70,7 +70,7 @@ class LoadFlac extends Command
         $doc->mat_code = 'z';
         $doc->bib_created = date('Y-m-d');
         $doc->active = 0;
-        sscanf(crc32($doc->_id), "%u",$crc_id);
+        sscanf(crc32($doc->_id), "%u", $crc_id);
         $doc->sphinx_id = (string)$crc_id;
         $this->info(print_r($doc));
         if ($this->confirm('Do you wish to save?')) {

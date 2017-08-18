@@ -16,9 +16,9 @@ class LicenseController extends Controller
     public function index()
     {
         $licenses = Cache::rememberForever('licenses', function () {
-            return License::orderBy('expires','dsc')->get();
+            return License::orderBy('expires', 'dsc')->get();
         });
-        return view('license.index',compact('licenses'));
+        return view('license.index', compact('licenses'));
     }
 
     /**
