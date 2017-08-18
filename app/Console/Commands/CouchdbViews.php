@@ -40,7 +40,7 @@ class CouchdbViews extends Command
     {
         $couch = resolve('Couchdb');
         try {
-            $view_by_license = $couch->stale('ok')->limit(1)->getView('couchcat','by_licensed_from');
+            $view_by_license = $couch->stale('ok')->limit(1)->getView('couchcat', 'by_licensed_from');
         } catch (Exception $e) {
             if ($e->getCode() == 404) {
                 $this->info('Creating Licensee View');
@@ -49,7 +49,7 @@ class CouchdbViews extends Command
                 $design_doc = new \stdClass();
                 $design_doc->_id = '_design/couchcat';
                 $design_doc->language = 'javascript';
-                $design_doc->views = array ( 'by_licensed_from'=> array ('map' => $view_licensed ), 'needs_review' => array('map' => $view_review) );
+                $design_doc->views =  [ 'by_licensed_from'=>  ['map' => $view_licensed ], 'needs_review' => ['map' => $view_review] ];
                 $couch->storeDoc($design_doc);
             }
         }

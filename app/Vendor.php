@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vendor extends Model
 {
-	protected $fillable = ['name', 'contact_name', 'contact_email'];
-	
+    protected $fillable = ['name', 'contact_name', 'contact_email'];
+    
     public function licenses()
     {
-    	$this->hasMany('Couchcat\License');
+        $this->hasMany(\Couchcat\License::class);
     }
 }

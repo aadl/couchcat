@@ -13,10 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\AwsInvalidate::class,
-        Commands\CouchdbViews::class,
-        Commands\LoadFlac::class,
-        Commands\ProcessNegatives::class,
+        //
     ];
 
     /**
@@ -38,6 +35,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
+        $this->load(__DIR__.'/Commands');
         require base_path('routes/console.php');
     }
 }
