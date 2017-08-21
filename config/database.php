@@ -114,9 +114,4 @@ return [
 
     ],
 
-    'couchdb' => [
-        'uri' => env('COUCHDB_URI', 'http://localhost:5984'),
-        'database' => env('COUCHDB_DATABASE', 'test'),
-    ],
-
 ];
