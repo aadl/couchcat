@@ -177,7 +177,7 @@ return [
         // Couchcat\Providers\BroadcastServiceProvider::class,
         Couchcat\Providers\EventServiceProvider::class,
         Couchcat\Providers\RouteServiceProvider::class,
-        
+        Couchcat\Providers\CouchdbServiceProvider::class
     ],
 
     /*
