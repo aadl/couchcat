@@ -11,7 +11,7 @@ class ProcessFlac extends Command
      *
      * @var string
      */
-    protected $signature = 'process:flac';
+    protected $signature = 'process:flac {couchid : id of existing couch record}';
 
     /**
      * The console command description.
