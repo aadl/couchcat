@@ -3,6 +3,9 @@
 namespace Couchcat\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
+use Couchcat\Processors\Music\Flac;
+use FFMpeg;
 
 class ProcessFlac extends Command
 {
@@ -28,6 +31,8 @@ class ProcessFlac extends Command
     public function __construct()
     {
         parent::__construct();
+
+        $this->couch = resolve('Couchdb');
     }
 
     /**
@@ -37,6 +42,21 @@ class ProcessFlac extends Command
      */
     public function handle()
     {
-        //
+        $couchid = $this->argument('couchid');
+        $doc = $this->couch->getDoc($couchid);
+        $flac = new Flac($doc);
+
+        Storage::makeDirectory('music/'.$couchid .'/derivatives');
+        $this->info($flac->createFlacZip());
+
+        $files = Storage::allFiles('music/'.$couchid .'/data');
+        foreach ($files as $file) {
+            if ($renamed = $flac->fixFlacFilename($file)) {
+                $this->info($renamed);
+            }
+            if ($converted = $flac->convertFlacMp3($file)) {
+                $this->info($converted);
+            }
+        }
     }
 }
