@@ -41,9 +41,9 @@ class LoadCsv extends Command
     {
         $csvfile = $this->argument('csvfile');
         
-        $publisher = = $this->ask('Publisher?');
-        $mat_code = = $this->ask('Mat Code?');
-        $licensee = = $this->ask('Licensee Stub?');
+        $publisher = $this->ask('Publisher?');
+        $mat_code = $this->ask('Mat Code?');
+        $licensee = $this->ask('Licensee Stub?');
         $csv = Reader::createFromPath(storage_path($csvfile), 'r');
         $csv->setHeaderOffset(0);
         $records = $csv->getRecords();
@@ -72,6 +72,7 @@ class LoadCsv extends Command
                     $doc->stdnum = array_map('trim', explode(',', $isbns));
                 }
             }
+            $doc->overview = $record['description'] ?? null;
             $doc->upc = $record['upc'] ?? null;
             $doc->pub_year = $record['pub_year'] ?? null;
             $doc->pub_info = $record['publisher'] ?? $publisher;
