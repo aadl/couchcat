@@ -5,6 +5,7 @@
 /public/js
 /public/*.json
 /storage/*.key
+/storage/*.csv
 /vendor
 /.idea
 Homestead.json
