@@ -3,7 +3,6 @@
 namespace Couchcat\Libraries;
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Storage;
 use IsoCodes\Isbn;
 
 class Syndetics
