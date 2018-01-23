@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.3",
         "laravel/framework": "5.5.*",
+        "laravel/tinker": "^1.0",
         "php-ffmpeg/php-ffmpeg": "^0.9.2",
         "php-on-couch/php-on-couch": "^2.0",
         "pixelpeter/laravel5-isocodes-validation": "^2.0",
