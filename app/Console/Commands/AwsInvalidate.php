@@ -43,8 +43,8 @@ class AwsInvalidate extends Command
         $cloudfront = AWS::createClient('cloudfront');
         $cloudfront->createInvalidation([
             'DistributionId' => env('AWS_CLOUDFRONT_DISTRIBUTION'),
-            'InvalidationBatch' => [ 
-                'CallerReference' => (string)time(),
+            'InvalidationBatch' => [
+                'CallerReference' => uniqid('aws_'),
                 'Paths' => [
                     'Items' => $invalidation_paths,
                     'Quantity' => count($invalidation_paths),
