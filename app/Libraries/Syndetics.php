@@ -20,8 +20,10 @@ class Syndetics
 
     public function getIsbn($isbn)
     {
+        $isbn = preg_replace('/[^\d]X/', '', $isbn);
+        $this->isbn = false;
         if (!Isbn::validate($isbn)) {
-            return false;
+            return $this;
         }
         $this->isbn = $isbn;
         $get_vars = 'isbn=' . $isbn . '/index.xml&client='.$this->client_id.'&type=xw10';
@@ -62,8 +64,10 @@ class Syndetics
 
     public function getCoverUrl()
     {
-        if (in_array('LC', $this->syndetics_links)) {
-            return $this->base_uri.'?isbn='.$this->isbn.'/LC.JPG&client='.$this->client_id.'&type=xw10&upc='.$this->upc.'&oclc='.$this->oclc;
+        if (isset($this->syndetics_links) && $this->isbn) {
+            if (in_array('LC', $this->syndetics_links)) {
+                return $this->base_uri.'?isbn='.$this->isbn.'/LC.JPG&client='.$this->client_id.'&type=xw10&upc='.$this->upc.'&oclc='.$this->oclc;
+            }
         }
         return false;
     }
