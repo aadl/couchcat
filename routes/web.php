@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::resource('license', 'LicenseController');
 Route::resource('vendor', 'VendorController');
 Route::resource('record', 'RecordController');
+Route::get('harvest/cover', 'HarvestController@cacheCover');
