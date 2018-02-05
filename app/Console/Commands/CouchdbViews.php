@@ -49,7 +49,8 @@ class CouchdbViews extends Command
                 $design_doc = new \stdClass();
                 $design_doc->_id = '_design/couchcat';
                 $design_doc->language = 'javascript';
-                $design_doc->views =  [ 'by_licensed_from'=>  ['map' => $view_licensed ], 'needs_review' => ['map' => $view_review] ];
+                $design_doc->views =  [ 'by_licensed_from'=>  ['map' => $view_licensed ],
+                                        'needs_review' => ['map' => $view_review] ];
                 $couch->storeDoc($design_doc);
             }
         }

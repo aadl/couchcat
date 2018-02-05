@@ -52,7 +52,7 @@ class CacheCovers extends Command
                 $response = $this->guzzle->request('GET', 'https://api.aadl.org/record/'.$record_id);
                 $record = json_decode($response->getBody());
                 if (isset($record->stdnum)) {
-                    if(is_array($record->stdnum)) {
+                    if (is_array($record->stdnum)) {
                         $isbn = $record->stdnum[0];
                     } else {
                         $isbn = $record->stdnum;

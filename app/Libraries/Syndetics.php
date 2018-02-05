@@ -66,7 +66,9 @@ class Syndetics
     {
         if (isset($this->syndetics_links) && $this->isbn) {
             if (in_array('LC', $this->syndetics_links)) {
-                return $this->base_uri.'?isbn='.$this->isbn.'/LC.JPG&client='.$this->client_id.'&type=xw10&upc='.$this->upc.'&oclc='.$this->oclc;
+                return $this->base_uri.'?isbn='.$this->isbn
+                    .'/LC.JPG&client='.$this->client_id
+                    .'&type=xw10&upc='.$this->upc.'&oclc='.$this->oclc;
             }
         }
         return false;
