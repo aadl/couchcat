@@ -1,9 +1,9 @@
 <?php
 
-namespace Couchcat\Console\Commands;
+namespace App\Console\Commands;
 
-use Couchcat\Libraries\Syndetics;
-use Couchcat\Libraries\CoverCache;
+use App\Libraries\Syndetics;
+use App\Libraries\CoverCache;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;

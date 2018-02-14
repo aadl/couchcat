@@ -1,10 +1,10 @@
 <?php
 
-namespace Couchcat\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
-use Couchcat\Processors\Music\Flac;
+use App\Processors\Music\Flac;
 use FFMpeg;
 
 class ProcessFlac extends Command

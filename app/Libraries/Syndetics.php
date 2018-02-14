@@ -1,6 +1,6 @@
 <?php
 
-namespace Couchcat\Libraries;
+namespace App\Libraries;
 
 use GuzzleHttp\Client;
 use IsoCodes\Isbn;

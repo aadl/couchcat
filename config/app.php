@@ -172,12 +172,12 @@ return [
         /*
          * Application Service Providers...
          */
-        Couchcat\Providers\AppServiceProvider::class,
-        Couchcat\Providers\AuthServiceProvider::class,
-        // Couchcat\Providers\BroadcastServiceProvider::class,
-        Couchcat\Providers\EventServiceProvider::class,
-        Couchcat\Providers\RouteServiceProvider::class,
-        Couchcat\Providers\CouchdbServiceProvider::class
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\CouchdbServiceProvider::class
     ],
 
     /*

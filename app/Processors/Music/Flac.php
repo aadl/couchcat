@@ -1,6 +1,6 @@
 <?php
 
-namespace Couchcat\Processors\Music;
+namespace App\Processors\Music;
 
 use Illuminate\Support\Facades\Storage;
 use Comodojo\Zip\Zip;

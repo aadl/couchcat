@@ -1,6 +1,6 @@
 <?php
 
-namespace Couchcat\Console\Commands;
+namespace App\Console\Commands;
 
 use AWS;
 use Illuminate\Console\Command;

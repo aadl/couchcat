@@ -1,6 +1,6 @@
 <?php
 
-namespace Couchcat;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class Vendor extends Model
     
     public function licenses()
     {
-        $this->hasMany(\Couchcat\License::class);
+        $this->hasMany(\App\License::class);
     }
 }

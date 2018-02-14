@@ -34,7 +34,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "Couchcat\\": "app/"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

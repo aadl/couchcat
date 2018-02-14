@@ -1,6 +1,6 @@
 <?php
 
-namespace Couchcat\Libraries;
+namespace App\Libraries;
 
 use AWS;
 use GuzzleHttp\Client;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Couchcat;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 

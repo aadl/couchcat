@@ -1,6 +1,6 @@
 <?php
 
-namespace Couchcat\Providers;
+namespace App\Providers;
 
 use PHPOnCouch\Couch;
 use PHPOnCouch\CouchClient;
