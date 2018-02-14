@@ -23,10 +23,10 @@ class CoverCache
     public function uploadCover($cover_file)
     {
         $s3 = AWS::createClient('s3');
-        return $s3->putObject(array(
+        return $s3->putObject([
             'Bucket'     => 'covers',
             'Key'        => $cover_file,
             'SourceFile' => storage_path($cover_file),
-        ));
+        ]);
     }
 }
