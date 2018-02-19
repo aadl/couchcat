@@ -62,6 +62,17 @@ class CacheCovers extends Command
                         $this->covercache->uploadCover($record_id.'.jpg');
                         $this->call('aws:invalidate', ['paths' => ['/cover/200/'.$record_id.'.jpg']]);
                     }
+                } elseif (isset($record->upc)) {
+                    if (is_array($record->upc)) {
+                        $upc = $record->upc[0];
+                    } else {
+                        $upc = $record->upc;
+                    }
+                    if ($coverurl = $this->syndetics->getUpc($upc)->getCoverUrl()) {
+                        $this->covercache->saveCover($coverurl, $record_id);
+                        $this->covercache->uploadCover($record_id.'.jpg');
+                        $this->call('aws:invalidate', ['paths' => ['/cover/200/'.$record_id.'.jpg']]);
+                    }
                 }
             }
         }
