@@ -64,7 +64,7 @@ class Syndetics
 
     public function getCoverUrl()
     {
-        if (isset($this->syndetics_links) && $this->isbn) {
+        if (isset($this->syndetics_links) && ($this->isbn || $this->upc || $this->oclc)) {
             if (in_array('LC', $this->syndetics_links)) {
                 return $this->base_uri.'?isbn='.$this->isbn
                     .'/LC.JPG&client='.$this->client_id
