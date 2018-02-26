@@ -1,6 +1,4 @@
-const { mix } = require('laravel-mix');
-const bourbon = require('bourbon').includePaths
-const neat = require('bourbon-neat').includePaths
+let mix = require('laravel-mix');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,4 +10,5 @@ const neat = require('bourbon-neat').includePaths
  |
  */
 
-mix.sass('resources/assets/sass/app.scss', 'public/css', { includePaths: bourbon.concat(neat) });
+ mix.js('resources/assets/js/app.js', 'public/js')
+    .sass('resources/assets/sass/app.scss', 'public/css');
