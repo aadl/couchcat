@@ -1,0 +1,41 @@
+table {
+  border-collapse: collapse;
+  margin: $base-spacing 0;
+  table-layout: fixed;
+  text-align: left;
+  width: 100%;
+}
+
+thead {
+  line-height: $heading-line-height;
+  vertical-align: bottom;
+}
+
+tbody {
+  vertical-align: top;
+}
+
+tr {
+  border-bottom: $base-border;
+}
+
+th {
+  font-weight: 600;
+}
+
+th,
+td {
+  padding: $small-spacing $small-spacing $small-spacing 0;
+}
+
+.td- {
+    &1 {
+        @include grid-column(1);
+    }
+    &2 {
+        @include grid-column(2);
+    }
+    &3 {
+        @include grid-column(3);
+    }
+}

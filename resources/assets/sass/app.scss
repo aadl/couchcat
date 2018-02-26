@@ -1,2 +1,51 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,400italic,600italic,600,700,700italic,900,300italic,300,200italic,200);
+
 @import "~bourbon/core/_bourbon.scss";
 @import "~bourbon-neat/core/_neat.scss";
+
+@import "normalize";
+@import "variables";
+@import "layout";
+@import "tables";
+@import "typography";
+
+.container {
+  @include margin(null auto);
+  @include grid-container();
+  max-width: 1200px;
+}
+
+// top nav
+nav {
+    background-color: #000;
+    height: 50px;
+}
+
+nav li {
+    display: inline-block;
+    width: 10%;
+    padding: 15px;
+    & a {
+        text-decoration: none;
+        color: #fff;
+        padding: 10px;
+    }
+}
+
+.btn {
+    min-width: 150px;
+    min-height: 40px;
+    padding: 7px;
+    background-color: #fff;
+    border: 1px solid #a3a3a3;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all .2s ease;
+    &:hover {
+        background-color: #666;
+        color: #fff;
+    }
+}
