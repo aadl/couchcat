@@ -10,6 +10,6 @@ class Vendor extends Model
     
     public function licenses()
     {
-        $this->hasMany(\App\License::class);
+        return $this->hasMany('App\License');
     }
 }

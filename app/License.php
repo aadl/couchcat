@@ -8,6 +8,6 @@ class License extends Model
 {
     public function vendor()
     {
-        return $this->belongsTo('CouchCat\Vendor');
+        return $this->belongsTo('App\Vendor');
     }
 }
