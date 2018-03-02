@@ -19,6 +19,7 @@ class CreateVendorsTable extends Migration
             $table->string('contact_name')->nullable();
             $table->string('contact_email')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
