@@ -16,11 +16,11 @@
 </tr>
 <tr>
 <td class='td-2'>Created</td>
-<td class='td-3'>{{ $vendor->created_at}}</td>
+<td class='td-3'>{{ $vendor->created_at->toDayDateTimeString()}}</td>
 </tr>
 <tr>
 <td class='td-2'>Updated</td>
-<td class='td-3'>{{ $vendor->updated_at}}</td>
+<td class='td-3'>{{ $vendor->updated_at->toDayDateTimeString()}}</td>
 </tr>
 </table>
 @endsection
