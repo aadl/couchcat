@@ -23,8 +23,4 @@
 <td class='td-3'>{{ $vendor->updated_at}}</td>
 </tr>
 </table>
-
-{{ Form::open(array('route' => ['vendor.destroy', $vendor->id], 'method' => 'DELETE')) }}
-{{ Form::submit('Delete Vendor') }}
-{{ Form::close() }}
 @endsection
