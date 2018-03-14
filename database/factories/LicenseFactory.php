@@ -4,7 +4,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\License::class, function (Faker $faker) {
     return [
-        'statistics_stub' => $faker->slug,
+        'statistics_stub' => $faker->unique->slug(2),
         'starts' => $faker->date,
+        'expires' => $faker->date,
     ];
 });
