@@ -19,7 +19,7 @@ class CreateLicensesTable extends Migration
             $table->string('statistics_stub')->unique();
             $table->date('starts');
             $table->date('expires')->nullable();
-            $table->boolean('public')->default(0);
+            $table->boolean('patrons_only')->default(1);
             $table->timestamps();
         });
     }
