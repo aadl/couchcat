@@ -3,7 +3,7 @@
 @section('title', 'Vendors')
 
 @section('content')
-<table>
+<table class="tables">
 	<thead>
 		<tr>
 		<th class='td-3'>Vendor</th>
