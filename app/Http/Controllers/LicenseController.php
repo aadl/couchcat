@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Cache;
 use App\License;
+use App\Vendor;
 use Illuminate\Http\Request;
 
 class LicenseController extends Controller
@@ -28,7 +29,10 @@ class LicenseController extends Controller
      */
     public function create()
     {
-        return view('license.create');
+        $vendors = Cache::rememberForever('vendors', function () {
+            return Vendor::orderBy('name', 'asc')->get();
+        });
+        return view('license.create', compact('vendors'));
     }
 
     /**
