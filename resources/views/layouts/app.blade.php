@@ -12,8 +12,8 @@
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item"><a class="navbar-brand active" href="/">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="/vendors">Vendors</a></li>
-              <li class="nav-item"><a class="nav-link" href="/licenses">Licenses</a></li>
+              <li class="nav-item"><a class="nav-link" href="/vendor">Vendors</a></li>
+              <li class="nav-item"><a class="nav-link" href="/license">Licenses</a></li>
             </ul>
             </nav>
         </header>
