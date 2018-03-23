@@ -19,15 +19,16 @@
 	<tbody>
 	@foreach($licenses as $license)
 		<tr>
-			<td class='td-3'><a href="/vendor/{{ $license['vendor']['id'] }}">{{ $license['vendor']['name'] }}</a></td>
-			<td class='td-2'>{{ $license['statistics_stub'] }}</td>
-			<td class='td-1'>{{ $license['starts'] }}</td>
-			<td class='td-1 {{ $license->expired ? 'text-danger' : 'text-success' }}'>{{ $license['expires'] }}</td>
-			<td class='td-1'>{{ $license['patrons_only'] ? 'yes' : 'no' }}</td>
-			<td class='td-1'>-</td>
-			<td class='td-2'><a href="{{ route('license.edit',['id' => $license['id']]) }}">Edit</a></td>
+			<td><a href="/vendor/{{ $license['vendor']['id'] }}">{{ $license['vendor']['name'] }}</a></td>
+			<td>{{ $license['statistics_stub'] }}</td>
+			<td>{{ $license['starts'] }}</td>
+			<td class='{{ $license->expired ? 'text-danger' : 'text-success' }}'>{{ $license['expires'] }}</td>
+			<td>{{ $license['patrons_only'] ? 'yes' : 'no' }}</td>
+			<td>-</td>
+			<td><a href="{{ route('license.edit',['id' => $license['id']]) }}">Edit</a></td>
 		</tr>
 	@endforeach
 	</tbody>
 </table>
+<a href="{{ route('license.create') }}" class="btn btn-outline-primary">Add License</a>
 @endsection
