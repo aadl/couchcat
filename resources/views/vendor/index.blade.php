@@ -22,7 +22,7 @@
 			<td>{{ $vendor->contact_name }}</td>
 			<td>{{ $vendor->contact_email }}</td>
 			<td>{{ $vendor->updated_at->toFormattedDateString() }}</td>
-			<td>{{ $vendor->licenses()->count() }}</td>
+			<td>{{ $vendor->licenses->count() }}</td>
 			<td><a href="{{ route('vendor.edit',['id' => $vendor['id']]) }}">Edit</a> / <a href="{{ route('license.create', ['vendor_id' => $vendor->id]) }}">Add License</a></td>
 		</tr>
 @endforeach
