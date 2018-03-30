@@ -17,7 +17,7 @@ class VendorController extends Controller
     public function index()
     {
         $vendors = Cache::rememberForever('vendors', function () {
-            return Vendor::orderBy('name', 'dsc')->get();
+            return Vendor::with('licenses')->orderBy('name', 'dsc')->get();
         });
         return view('vendor.index', compact('vendors'));
     }
