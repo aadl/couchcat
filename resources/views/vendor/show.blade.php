@@ -5,22 +5,15 @@
 @section('content')
 
 <h1>{{ $vendor->name }} (<a href="{{ route('vendor.edit',['id' => $vendor['id']]) }}">Edit</a>)</h1>
-<table>
-<tr>
-<td class='td-2'>Contact Name</td>
-<td class='td-3'>{{ $vendor->contact_name}}</td>
-</tr>
-<tr>
-<td class='td-2'>Contact Email</td>
-<td class='td-3'>{{ $vendor->contact_email}}</td>
-</tr>
-<tr>
-<td class='td-2'>Created</td>
-<td class='td-3'>{{ $vendor->created_at->toDayDateTimeString()}}</td>
-</tr>
-<tr>
-<td class='td-2'>Updated</td>
-<td class='td-3'>{{ $vendor->updated_at->toDayDateTimeString()}}</td>
-</tr>
-</table>
+<hr>
+<h4>Contact Information</h4>
+<p>{{ $vendor->contact_name}}</p>
+<p>{{ $vendor->contact_email}}</p>
+<p>{!! nl2br(e($vendor->contact_address)) !!}</p>
+<h4>Notes</h4>
+<p>{!! nl2br(e($vendor->notes)) !!}</p>
+<h4>History</h4>
+<p>Created at: {{ $vendor->created_at->toDayDateTimeString()}}</p>
+<p>Updated at: {{ $vendor->updated_at->toDayDateTimeString()}}</p>
+
 @endsection

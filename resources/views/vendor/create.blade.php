@@ -34,6 +34,18 @@
         <input type="email" class="form-control" name="contact_email" id="contact_email" placeholder="bob@ross.com">
     </div>
 </div>
+<div class="form-group row">
+    <label for="contact_address" class="col-sm-2 col-form-label">Mailing Address</label>
+    <div class="col-sm-6">
+        <textarea class="form-control" name="contact_address" id="contact_address"></textarea>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="notes" class="col-sm-2 col-form-label">Notes</label>
+    <div class="col-sm-6">
+        <textarea class="form-control" name="notes" id="notes"></textarea>
+    </div>
+</div>
 <button type="submit" class="btn btn-primary mb-2">Add Vendor</button>
 
 {{ Form::close() }}
