@@ -9,7 +9,7 @@ class Vendor extends Model
 {
     use SoftDeletes;
     
-    protected $fillable = ['name', 'contact_name', 'contact_email'];
+    protected $fillable = ['name', 'contact_name', 'contact_email', 'contact_address', 'notes'];
 
     public function licenses()
     {
