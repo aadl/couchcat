@@ -15,13 +15,26 @@
 
 {{ Form::open(array('route' => 'vendor.store')) }}
 
-{{ Form::label('name', 'Vendor Name') }}
-{{ Form::text('name') }}
-{{ Form::label('contact_name', 'Contact Name') }}
-{{ Form::text('contact_name') }}
-{{ Form::label('contact_email', 'Contact Email') }}
-{{ Form::text('contact_email') }}
-{{ Form::submit('Add Vendor') }}
+<div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Vendor Name</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" name="name" id="name" placeholder="My Vendor">
+    </div>
+</div>
+<div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Contact Name</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" aria-describedby="contactNameHelp" name="contact_name" id="contact_name" placeholder="Contact Name">
+        <small id="contactNameHelp" class="form-text text-muted">Can be same as vendor name.</small>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Contact Email</label>
+    <div class="col-sm-6">
+        <input type="email" class="form-control" name="contact_email" id="contact_email" placeholder="bob@ross.com">
+    </div>
+</div>
+<button type="submit" class="btn btn-primary mb-2">Add Vendor</button>
 
 {{ Form::close() }}
 
