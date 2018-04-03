@@ -18,14 +18,14 @@
 <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">Vendor Name</label>
     <div class="col-sm-6">
-        <input type="text" class="form-control" name="name" id="name" placeholder="My Vendor">
+        <input type="text" class="form-control" name="name" id="name" placeholder="My Vendor" required>
     </div>
 </div>
 <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">Contact Name</label>
     <div class="col-sm-6">
         <input type="text" class="form-control" aria-describedby="contactNameHelp" name="contact_name" id="contact_name" placeholder="Contact Name">
-        <small id="contactNameHelp" class="form-text text-muted">Can be same as vendor name.</small>
+        <small id="contactNameHelp" class="form-text text-muted">Can be blank if same as vendor.</small>
     </div>
 </div>
 <div class="form-group row">
@@ -44,9 +44,9 @@
     <label for="notes" class="col-sm-2 col-form-label">Notes</label>
     <div class="col-sm-6">
         <textarea class="form-control" name="notes" id="notes"></textarea>
+        <button type="submit" class="btn btn-primary float-right mt-2">Add Vendor</button>
     </div>
 </div>
-<button type="submit" class="btn btn-primary mb-2">Add Vendor</button>
 
 {{ Form::close() }}
 
