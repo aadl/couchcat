@@ -42,14 +42,14 @@ return [
              * MySQL, PostgreSQL, SQLite and Mongo databases are supported.
              */
             'databases' => [
-                'mysql',
+                'sqlite',
             ],
         ],
 
         /*
          * The database dump can be gzipped to decrease diskspace usage.
          */
-        'gzip_database_dump' => false,
+        'gzip_database_dump' => true,
 
         'destination' => [
 
@@ -92,7 +92,7 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => 'your@example.com',
+            'to' => 'eby@aadl.org',
         ],
 
         'slack' => [
@@ -160,17 +160,17 @@ return [
             /*
              * The number of weeks for which one weekly backup must be kept.
              */
-            'keepWeeklyBackupsForWeeks' => 8,
+            'keepWeeklyBackupsForWeeks' => 2,
 
             /*
              * The number of months for which one monthly backup must be kept.
              */
-            'keepMonthlyBackupsForMonths' => 4,
+            'keepMonthlyBackupsForMonths' => 1,
 
             /*
              * The number of years for which one yearly backup must be kept.
              */
-            'keepYearlyBackupsForYears' => 2,
+            'keepYearlyBackupsForYears' => 1,
 
             /*
              * After cleaning up the backups remove the oldest backup until
