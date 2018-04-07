@@ -14,11 +14,11 @@
         "bootstrap": "^4.0.0",
         "bourbon": "^5.0.0",
         "bourbon-neat": "2.1.0",
-        "cross-env": "^5.1",
+        "cross-env": "^5.1.4",
         "jquery": "^3.2",
-        "laravel-mix": "^2.0.0",
+        "laravel-mix": "^2.1.11",
         "lodash": "^4.17.5",
-        "popper.js": "^1.12"
+        "popper.js": "^1.14.3"
     },
     "dependencies": []
 }
