@@ -42,7 +42,7 @@
     {{ Form::label('notes', 'Notes', ['class' => 'col-sm-2 col-form-label']) }}
     <div class="col-sm-6">
         {{ Form::textarea('notes', null , ['class' => 'form-control']) }}
-        <button type="submit" class="btn btn-primary float-right mt-2">Update Vendor</button>
+        <button type="submit" class="btn btn-outline-primary float-right mt-2">Update Vendor</button>
     </div>
 </div>
 {{ Form::close() }}
