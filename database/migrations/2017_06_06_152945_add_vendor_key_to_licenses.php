@@ -25,8 +25,6 @@ class AddVendorKeyToLicenses extends Migration
      */
     public function down()
     {
-        Schema::table('licenses', function (Blueprint $table) {
-            $table->dropForeign('licenses_vendor_id_foreign');
-        });
+        //
     }
 }

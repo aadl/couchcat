@@ -31,6 +31,6 @@ class CreateLicensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('licenses');
+        //Schema::dropIfExists('licenses');
     }
 }
