@@ -19,7 +19,10 @@ class LicenseController extends Controller
         $licenses = Cache::rememberForever('licenses', function () {
             return License::with('vendor')->orderBy('expires', 'asc')->get();
         });
-        return view('license.index', compact('licenses'));
+        $couch = resolve('Couchdb');
+        $records_view = $couch->group(true)->getView('couchcat', 'licensed_from');
+        $records = $records_view->rows;
+        return view('license.index', compact('licenses', 'records'));
     }
 
     /**
