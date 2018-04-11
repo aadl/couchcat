@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::resource('license', 'LicenseController');
 Route::resource('vendor', 'VendorController');
+Route::get('/', 'VendorController@welcome');
 Route::resource('record', 'RecordController');
 Route::get('harvest/cover', 'HarvestController@cacheCover');

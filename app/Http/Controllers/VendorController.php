@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Cache;
+use App\License;
 use App\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -103,5 +104,12 @@ class VendorController extends Controller
         $vendor->delete();
         Cache::forget('vendors');
         return redirect('vendor');
+    }
+
+    public function welcome()
+    {
+        $vendor_changes = Vendor::orderBy('updated_at', 'DESC')->take(5)->get();
+        $license_changes = License::orderBy('updated_at', 'DESC')->take(5)->get();
+        return view('welcome', compact('vendor_changes', 'license_changes'));
     }
 }
