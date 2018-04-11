@@ -49,7 +49,7 @@ class VendorController extends Controller
         $input = $request->all();
         $vendor->fill($input)->save();
         Cache::forget('vendors');
-        return redirect('vendor');
+        return redirect('vendor/'.$vendor->id);
     }
 
     /**
@@ -90,7 +90,7 @@ class VendorController extends Controller
         $input = $request->all();
         $vendor->fill($input)->save();
         Cache::forget('vendors');
-        return redirect('vendor');
+        return redirect('vendor/'.$vendor->id);
     }
 
     /**
