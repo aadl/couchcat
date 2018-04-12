@@ -10,7 +10,7 @@ class License extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [ 'vendor_id', 'cost', 'notes', 'statistics_stub', 'starts', 'expires' ];
+    protected $fillable = [ 'vendor_id', 'cost', 'notes', 'license_slug', 'starts', 'expires' ];
 
     public function vendor()
     {
@@ -20,5 +20,12 @@ class License extends Model
     public function getExpiredAttribute()
     {
         return Carbon::parse($this->expires)->isPast();
+    }
+
+    public function getRecordsCountAttribute()
+    {
+        $couch = resolve('Couchdb');
+        $records_view = $couch->key($this->license_slug)->group(true)->getView('couchcat', 'licensed_from');
+        return $records_view->rows[0]->value ?? 0;
     }
 }

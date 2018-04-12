@@ -19,9 +19,6 @@ class LicenseController extends Controller
         $licenses = Cache::rememberForever('licenses', function () {
             return License::with('vendor')->orderBy('expires', 'asc')->get();
         });
-        $couch = resolve('Couchdb');
-        $records_view = $couch->group(true)->getView('couchcat', 'licensed_from');
-        $records = $records_view->rows;
         return view('license.index', compact('licenses', 'records'));
     }
 
@@ -48,7 +45,7 @@ class LicenseController extends Controller
     {
         $this->validate($request, [
             'vendor_id' => 'required|exists:vendors,id',
-            'statistics_stub' => 'required|unique:licenses',
+            'license_slug' => 'required|unique:licenses',
             'starts' => 'required|date',
             'ends' => 'nullable|date'
         ]);

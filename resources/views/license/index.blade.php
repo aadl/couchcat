@@ -8,7 +8,7 @@
 	<thead class="thead-dark">
 		<tr>
 		<th scope="col">Vendor</th>
-		<th scope="col">Catalog Stub</th>
+		<th scope="col">License Slug</th>
 		<th scope="col">Starts</th>
 		<th scope="col">Expires</th>
 		<th scope="col">Patrons Only</th>
@@ -18,20 +18,14 @@
 	</thead>
 	<tbody>
 	@foreach($licenses as $license)
-		@php 
-			$records_count = 0;
-			if ($records_key = array_search($license->statistics_stub, array_column($records, 'key'))) {
-				$records_count = $records[$records_key]->value;
-			}
-		@endphp
 		<tr>
-			<td><a href="{{ route('vendor.show',['id' => $license['vendor']['id']]) }}">{{ $license['vendor']['name'] }}</a></td>
-			<td>{{ $license['statistics_stub'] }}</td>
-			<td>{{ $license['starts'] }}</td>
-			<td class='{{ $license->expired ? 'text-danger' : 'text-success' }}'>{{ $license['expires'] }}</td>
-			<td>{{ $license['patrons_only'] ? 'yes' : 'no' }}</td>
-			<td>{{ $records_count }}</td>
-			<td><a href="{{ route('license.edit',['id' => $license['id']]) }}">Edit</a></td>
+			<td><a href="{{ route('vendor.show',['id' => $license->vendor->id]) }}">{{ $license->vendor->name }}</a></td>
+			<td>{{ $license->license_slug }}</td>
+			<td>{{ $license->starts }}</td>
+			<td class='{{ $license->expired ? 'text-danger' : 'text-success' }}'>{{ $license->expires }}</td>
+			<td>{{ $license->patrons_only ? 'yes' : 'no' }}</td>
+			<td>{{ $license->records_count }}</td>
+			<td><a href="{{ route('license.edit',['id' => $license->id]) }}">Edit</a></td>
 		</tr>
 	@endforeach
 	</tbody>

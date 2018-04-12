@@ -25,14 +25,14 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="statistics_stub" class="col-sm-2 col-form-label">Statistics Stub</label>
+    <label for="license_slug" class="col-sm-2 col-form-label">Statistics Stub</label>
     <div class="col-sm-6">
-        <input type="text" class="form-control" name="statistics_stub" aria-describedby="statsHelp" placeholder="my-license">
-        <small id="statsHelp" class="form-text text-muted">A unique string for use in generating reports for this license (no spaces).</small>
+        <input type="text" class="form-control" name="license_slug" aria-describedby="statsHelp" placeholder="my-license">
+        <small id="statsHelp" class="form-text text-muted">A unique string for use in generating reports and organizing for this license (no spaces).</small>
     </div>
 </div>
 <div class="form-group row">
-    <label for="statistics_stub" class="col-sm-2 col-form-label">Cost</label>
+    <label for="cost" class="col-sm-2 col-form-label">Cost</label>
     <div class="col-sm-6 input-group">
         <div class="input-group-prepend">
             <div class="input-group-text">$</div>
