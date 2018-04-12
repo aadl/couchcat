@@ -30,7 +30,7 @@ class LicenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $vendors = Cache::rememberForever('vendors', function () {
             return Vendor::orderBy('name', 'asc')->get();
@@ -46,7 +46,17 @@ class LicenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'vendor_id' => 'required|exists:vendors,id',
+            'statistics_stub' => 'required|unique:licenses',
+            'starts' => 'required|date',
+            'ends' => 'nullable|date'
+        ]);
+        $license = new License;
+        $input = $request->all();
+        $license->fill($input)->save();
+        Cache::forget('licenses');
+        return redirect('license/'.$license->id);
     }
 
     /**
