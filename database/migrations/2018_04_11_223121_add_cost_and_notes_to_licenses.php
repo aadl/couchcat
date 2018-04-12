@@ -15,7 +15,7 @@ class AddCostAndNotesToLicenses extends Migration
     {
         Schema::table('licenses', function (Blueprint $table) {
             $table->mediumText('notes')->nullable();
-            $table->integer('cost')->nullable();
+            $table->string('cost')->nullable();
         });
     }
 
