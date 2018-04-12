@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Vendor')
+@section('title', 'Vendor | ' . $vendor->name)
 
 @section('content')
 
