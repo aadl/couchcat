@@ -75,7 +75,7 @@ class LicenseController extends Controller
      */
     public function edit(License $license)
     {
-        //
+        return view('license.edit', compact('license'));
     }
 
     /**
