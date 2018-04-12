@@ -30,7 +30,7 @@ class LicenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $vendors = Cache::rememberForever('vendors', function () {
             return Vendor::orderBy('name', 'asc')->get();
@@ -57,7 +57,7 @@ class LicenseController extends Controller
      */
     public function show(License $license)
     {
-        //
+        return view('license.show', compact('license'));
     }
 
     /**
