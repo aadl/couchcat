@@ -21,6 +21,7 @@ class CreateLicensesTable extends Migration
             $table->date('expires')->nullable();
             $table->boolean('patrons_only')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
