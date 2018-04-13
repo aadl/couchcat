@@ -55,6 +55,7 @@ class LicenseController extends Controller
         $license->patrons_only = $request->has('patrons_only');
         $license->save();
         Cache::forget('licenses');
+        Cache::forget('vendors');
         return redirect('license/'.$license->id);
     }
 
