@@ -55,9 +55,9 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="public" class="col-sm-2 col-form-label">Public Access</label>
+    <label for="patrons_only" class="col-sm-2 col-form-label">Patrons Only</label>
     <div class="col-sm-3">
-        <input type="checkbox" class="form-control" name="public" aria-describedby="publicHelp">
+        <input type="checkbox" class="form-control" name="patrons_only" aria-describedby="publicHelp" checked>
         <small id="publicHelp" class="form-text text-muted">Check if this should be public access (no Lcard required).</small>
     </div>
 </div>
