@@ -21,6 +21,7 @@
             <li><a href="{{ route('license.show',['id' => $license->id]) }}">{{ $license->license_slug }}</a> (expires {{ $license->expires }})</li>
         @endforeach
         </ul>
+        <a href="{{ route('license.create',['vendor_id' => $vendor->id]) }}" class="btn btn-outline-primary mt-2">Add License</a>
     </div>
 </div>
 <div class="card mt-3">
