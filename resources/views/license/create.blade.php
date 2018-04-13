@@ -51,6 +51,12 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="notes" class="col-sm-2 col-form-label">Notes</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('notes', null , ['class' => 'form-control']) }}
+    </div>
+</div>
+<div class="form-group row">
     <label for="patrons_only" class="col-sm-2 col-form-label">Patrons Only</label>
     <div class="col-sm-6">
         <input type="checkbox" class="form-control" name="patrons_only" aria-describedby="publicHelp" checked>
