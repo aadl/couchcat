@@ -8,7 +8,7 @@
 <div class="card">
     <h4 class="card-header">Vendor Information</h4>
     <div class="card-body">
-        <p><a href="{{ route('vendor.show',['id' => $license->vendor->id]) }}">{{ $license->vendor->contact_name}}</a></p>
+        <p><a href="{{ route('vendor.show',['id' => $license->vendor->id]) }}">{{ $license->vendor->name}}</a></p>
         <p>{{ $license->vendor->contact_email}}</p>
         <p>{!! nl2br(e($license->vendor->contact_address)) !!}</p>
     </div>
