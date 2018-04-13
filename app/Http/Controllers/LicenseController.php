@@ -6,6 +6,7 @@ use Cache;
 use App\License;
 use App\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LicenseController extends Controller
 {
@@ -51,7 +52,9 @@ class LicenseController extends Controller
         ]);
         $license = new License;
         $input = $request->all();
-        $license->fill($input)->save();
+        $license->fill($input);
+        $license->patrons_only = $request->has('patrons_only');
+        $license->save();
         Cache::forget('licenses');
         return redirect('license/'.$license->id);
     }
@@ -75,7 +78,8 @@ class LicenseController extends Controller
      */
     public function edit(License $license)
     {
-        return view('license.edit', compact('license'));
+        $vendors = Vendor::all()->pluck('name', 'id');
+        return view('license.edit', compact('license', 'vendors'));
     }
 
     /**
@@ -87,7 +91,18 @@ class LicenseController extends Controller
      */
     public function update(Request $request, License $license)
     {
-        //
+        $this->validate($request, [
+            'vendor_id' => 'required|exists:vendors,id',
+            'license_slug' => ['required',Rule::unique('licenses')->ignore($license->id)],
+            'starts' => 'required|date',
+            'ends' => 'nullable|date'
+        ]);
+        $input = $request->all();
+        $license->fill($input);
+        $license->patrons_only = $request->has('patrons_only');
+        $license->save();
+        Cache::forget('licenses');
+        return redirect('license/'.$license->id);
     }
 
     /**
