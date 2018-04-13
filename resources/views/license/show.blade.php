@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h1>{{ $license->statistics_stub }} <a href="{{ route('license.edit',['id' => $license->id]) }}" class="btn btn-outline-primary float-right">Edit License</a></h1>
+<h1>{{ $license->license_slug }} <a href="{{ route('license.edit',['id' => $license->id]) }}" class="btn btn-outline-primary float-right">Edit License</a></h1>
 <div class="card">
     <h4 class="card-header">Vendor Information</h4>
     <div class="card-body">
@@ -17,6 +17,7 @@
     <h4 class="card-header">License Information</h4>
     <div class="card-body">
         <p>Cost: {{ $license->cost }}</p>
+        <p>Patrons Only: {{ $license->patrons_only ? 'yes' : 'no' }}</p>
     </div>
 </div>
 <div class="card mt-3">
