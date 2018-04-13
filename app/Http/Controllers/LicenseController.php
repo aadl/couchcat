@@ -28,12 +28,11 @@ class LicenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $vendors = Cache::rememberForever('vendors', function () {
-            return Vendor::orderBy('name', 'asc')->get();
-        });
-        return view('license.create', compact('vendors'));
+        $vendors = Vendor::all()->pluck('name', 'id');
+        $vendor_id = $request->input('vendor_id') ?? 1;
+        return view('license.create', compact('vendors', 'vendor_id'));
     }
 
     /**
