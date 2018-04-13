@@ -18,7 +18,7 @@
 <h3>Recent License Changes</h3>
 <ul>
     @foreach($license_changes as $license_change)
-        <li><a href="{{ route('license.show',['id' => $license_change->id]) }}">{{ $license_change->statistics_stub }}</a> ( {{ $license_change->updated_at }})</li>
+        <li><a href="{{ route('license.show',['id' => $license_change->id]) }}">{{ $license_change->license_slug }}</a> ( {{ $license_change->updated_at }})</li>
     @endforeach
 </ul>
 @endsection
