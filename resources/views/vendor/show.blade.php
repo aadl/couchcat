@@ -18,7 +18,7 @@
     <div class="card-body">
         <ul>
         @foreach($vendor->licenses as $license)
-            <li><a href="{{ route('license.show',['id' => $license->id]) }}">{{ $license->statistics_stub }}</a> (expires {{ $license->expires }})</li>
+            <li><a href="{{ route('license.show',['id' => $license->id]) }}">{{ $license->license_slug }}</a> (expires {{ $license->expires }})</li>
         @endforeach
         </ul>
     </div>
