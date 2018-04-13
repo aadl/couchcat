@@ -19,7 +19,8 @@ class License extends Model
 
     public function getExpiredAttribute()
     {
-        return Carbon::parse($this->expires)->isPast();
+        $expires = $this->expires ?? Carbon::tomorrow();
+        return Carbon::parse($expires)->isPast();
     }
 
     public function getRecordsCountAttribute()

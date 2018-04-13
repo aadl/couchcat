@@ -22,7 +22,7 @@
 			<td><a href="{{ route('vendor.show',['id' => $license->vendor->id]) }}">{{ $license->vendor->name }}</a></td>
 			<td>{{ $license->license_slug }}</td>
 			<td>{{ $license->starts }}</td>
-			<td class='{{ $license->expired ? 'text-danger' : 'text-success' }}'>{{ $license->expires }}</td>
+			<td class='{{ $license->expired ? 'text-danger' : 'text-success' }}'>{{ $license->expires ?? 'indefinite' }}</td>
 			<td>{{ $license->patrons_only ? 'yes' : 'no' }}</td>
 			<td>{{ $license->records_count }}</td>
 			<td><a href="{{ route('license.edit',['id' => $license->id]) }}">Edit</a></td>
