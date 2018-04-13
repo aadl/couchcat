@@ -10,7 +10,7 @@ class License extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [ 'vendor_id', 'cost', 'notes', 'license_slug', 'starts', 'expires' ];
+    protected $fillable = [ 'vendor_id', 'cost', 'notes', 'license_slug', 'starts', 'expires', 'patrons_only' ];
 
     public function vendor()
     {
