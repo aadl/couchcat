@@ -41,7 +41,7 @@ class Mp3
 
     public function createMp3Zip()
     {
-        $directory = storage_path('app/music/'.$this->couchid .'/derivatives/');
+        $directory = storage_path('app/music/'.$this->couchid .'/derivatives/tracks/');
         $zip_filename = $directory . $this->couchid . '.zip';
         $zip_exists = Storage::exists('music/'.$this->couchid.'/derivatives/'.$this->couchid . '.zip');
 
@@ -49,7 +49,7 @@ class Mp3
 
         $zip = Zip::create($zip_filename);
         $zip->setSkipped('HIDDEN');
-        $files = Storage::allFiles('music/'.$this->couchid.'/derivatives/');
+        $files = Storage::allFiles('music/'.$this->couchid.'/derivatives/tracks/');
         $to_add = array();
         foreach($files as $file) {
             $parsepath = pathinfo($file);

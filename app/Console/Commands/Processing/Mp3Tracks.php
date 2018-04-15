@@ -46,7 +46,7 @@ class Mp3Tracks extends Command
     {
         $couchid = $this->argument('couchid');
         $doc = $this->couch->getDoc($couchid);
-        $files = Storage::allFiles('music/'.$couchid .'/derivatives');
+        $files = Storage::allFiles('music/'.$couchid .'/derivatives/tracks');
         foreach ($files as $file) {
             $parsepath = pathinfo($file);
             if($parsepath['extension'] == 'mp3') {
