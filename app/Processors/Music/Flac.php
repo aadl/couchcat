@@ -66,7 +66,7 @@ class Flac
         $format
             ->setAudioChannels(2)
             ->setAudioKiloBitrate(320);
-        $mp3_file = storage_path('app/music/'.$this->couchid.'/derivatives/'.$parsepath['filename'].'.mp3');
+        $mp3_file = storage_path('app/music/'.$this->couchid.'/derivatives/tracks/'.$parsepath['filename'].'.mp3');
         $saved = $audio->save($format, $mp3_file);
         if ($saved) {
             return "Converted $mp3_file";

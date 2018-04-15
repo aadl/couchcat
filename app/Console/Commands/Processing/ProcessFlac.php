@@ -47,7 +47,7 @@ class ProcessFlac extends Command
         $flac = new Flac($doc);
 
         Storage::makeDirectory('music/'.$couchid .'/derivatives');
-
+        Storage::makeDirectory('music/'.$couchid .'/derivatives/tracks');
         $files = Storage::allFiles('music/'.$couchid .'/data');
         foreach ($files as $file) {
             if ($renamed = $flac->fixFlacFilename($file)) {
