@@ -57,7 +57,6 @@ class Mp3
                 $to_add[] = storage_path('app/'.$file);
             }
         }
-        print_r($to_add);
         $zip->add($to_add);
         if ($zip->close()) {
             return "Created $zip_filename";
