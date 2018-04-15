@@ -47,13 +47,16 @@ class ProcessFlac extends Command
         $flac = new Flac($doc);
 
         Storage::makeDirectory('music/'.$couchid .'/derivatives');
-        $this->info($flac->createFlacZip());
 
         $files = Storage::allFiles('music/'.$couchid .'/data');
         foreach ($files as $file) {
             if ($renamed = $flac->fixFlacFilename($file)) {
                 $this->info($renamed);
             }
+        }
+        $this->info($flac->createFlacZip());
+        $renamed_files = Storage::allFiles('music/'.$couchid .'/data');
+        foreach ($renamed_files as $file) {
             if ($converted = $flac->convertFlacMp3($file)) {
                 $this->info($converted);
             }
