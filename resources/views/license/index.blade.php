@@ -25,7 +25,10 @@
 			<td class='{{ $license->expired ? 'text-danger' : 'text-success' }}'>{{ $license->expires ?? 'indefinite' }}</td>
 			<td>{{ $license->patrons_only ? 'yes' : 'no' }}</td>
 			<td>{{ $license->records_count }}</td>
-			<td><a href="{{ route('license.edit',['id' => $license->id]) }}">Edit</a></td>
+			<td>
+				<a href="{{ route('license.edit',['id' => $license->id]) }}">Edit</a><br>
+				<a href="{{ route('record.create', ['license_slug' => $license->license_slug]) }}">Add Record</a>
+			</td>
 		</tr>
 	@endforeach
 	</tbody>
