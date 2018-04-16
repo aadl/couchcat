@@ -42,6 +42,13 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="patrons_only" class="col-sm-2 col-form-label">Cover Image</label>
+    <div class="col-sm-6">
+        {{ Form::file('attachment', null, null, ['class' => 'form-control', 'aria-describedby' => 'coverHelp']) }}
+        <small id="coverHelp" class="form-text text-muted">Attach a cover image.</small>
+    </div>
+</div>
+<div class="form-group row">
     <label for="patrons_only" class="col-sm-2 col-form-label">Record File(s)</label>
     <div class="col-sm-6">
         {{ Form::file('attachment', null, null, ['class' => 'form-control', 'aria-describedby' => 'attachmentHelp']) }}
@@ -55,6 +62,6 @@
         <small id="publicHelp" class="form-text text-muted">Uncheck if this should suppressed in the public catalog.</small>
     </div>
 </div>
+<button type="submit" class="btn btn-primary mb-2">Create Record</button>
 {{ Form::close() }}
 @endsection
-
