@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
+use App\License;
+use App\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class RecordController extends Controller
 {
@@ -21,9 +25,11 @@ class RecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $mat_types = config('mat_types');
+        $license_slug = $request->input('license_slug') ?? '';
+        return view('record.create', compact('mat_types', 'license_slug'));
     }
 
     /**
