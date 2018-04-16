@@ -27,7 +27,7 @@ class RecordController extends Controller
      */
     public function create(Request $request)
     {
-        $mat_types = config('mat_types');
+        $mat_types = config('mat_types')['downloads'];
         $license_slug = $request->input('license_slug') ?? '';
         return view('record.create', compact('mat_types', 'license_slug'));
     }
