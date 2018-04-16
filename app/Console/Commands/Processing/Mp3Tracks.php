@@ -15,7 +15,7 @@ class Mp3Tracks extends Command
      *
      * @var string
      */
-    protected $signature = 'mp3:process-tracks {couchid : id of existing couch record}';
+    protected $signature = 'process:mp3:metadata {couchid : id of existing couch record}';
 
     /**
      * The console command description.
