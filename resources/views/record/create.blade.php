@@ -12,7 +12,7 @@
         </ul>
     </div>
 @endif
-{{ Form::open(array('route' => 'record.store')) }}
+{{ Form::open(array('route' => 'record.store', 'files' => true)) }}
 <div class="form-group row">
     <label for="license_slug" class="col-sm-2 col-form-label">License Name</label>
     <div class="col-sm-6">
