@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Cache;
+use Storage;
+use App\Libraries\CoverCache;
 use App\License;
 use App\Vendor;
 use Illuminate\Http\Request;
@@ -40,7 +42,30 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'license_slug' => 'required',
+            'cover' => 'sometimes|mimes:jpg,jpeg'
+        ]);
+        $couch = resolve('Couchdb');
+        $input = $request->all();
+        $record = new \stdClass;
+        $record->_id = str_slug($input['title'], '-');
+        $record->licensed_from = $input['license_slug'];
+        $record->mat_code = $input['mat_type'];
+        $record->pub_year = $input['pub_year'];
+        $record->active = $input['is_active'];
+        if ($input['cover']) 
+        {
+            
+        }
+
+        try {
+            $couch->storeDoc($record);
+        } catch (Exception $e) {
+            $this->error("Getting record failed : " . $e->getMessage());
+        }
+
     }
 
     /**
