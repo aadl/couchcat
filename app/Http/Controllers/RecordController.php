@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Artisan;
 use Cache;
 use Storage;
-use App\Libraries\CoverCache;
+use App\Libraries\FileHandler;
 use App\License;
 use App\Vendor;
 use Illuminate\Http\Request;
@@ -47,19 +48,40 @@ class RecordController extends Controller
             'license_slug' => 'required',
             'cover' => 'sometimes|mimes:jpg,jpeg'
         ]);
-        $couch = resolve('Couchdb');
+
         $input = $request->all();
+        $file_handler = new FileHandler;
+
+        // create new record object and assign fields
         $record = new \stdClass;
         $record->_id = str_slug($input['title'], '-');
         $record->licensed_from = $input['license_slug'];
-        $record->mat_code = $input['mat_type'];
+        $record->mat_code = $input['mat_code'];
         $record->pub_year = $input['pub_year'];
-        $record->active = $input['is_active'];
-        if ($input['cover']) 
-        {
-            
+        $record->active = ($input['is_active'] ?? 0);
+
+        // if attachments do extra validation on the file and then upload it
+        if ($input['attachment']) {
+            $license_paths = config('license_paths');
+            if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
+                $allowed = 'pdf';
+                $save_as = '.pdf';
+                $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/';
+            }
+            $this->validate($request, [
+                'attachment' => 'required|mimes:' . $allowed
+            ]);
+            $input['attachment']->storeAs('/', $record->_id . $save_as);
+            $file_handler->uploadFile('app/' . $record->_id . $save_as, 'licensed', $path);
+        }
+         
+        if ($input['cover']) {
+            $input['cover']->storeAs('/', $record->_id . '.jpg');
+            $file_handler->uploadFile('app/' . $record->_id . '.jpg', 'covers');
+            Artisan::call('aws:invalidate', ['paths' => ['/cover/200/'.$record->_id.'.jpg']]);
         }
 
+        $couch = resolve('Couchdb');
         try {
             $couch->storeDoc($record);
         } catch (Exception $e) {
