@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Libraries\Syndetics;
-use App\Libraries\CoverCache;
+use App\Libraries\FileHandler;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;
@@ -32,7 +32,7 @@ class CacheCovers extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->covercache = new CoverCache;
+        $this->covercache = new FileHandler;
         $this->syndetics = new Syndetics('anarp');
         $this->guzzle = new Client();
     }
@@ -59,7 +59,7 @@ class CacheCovers extends Command
                     }
                     if ($coverurl = $this->syndetics->getIsbn($isbn)->getCoverUrl()) {
                         $this->covercache->saveCover($coverurl, $record_id);
-                        $this->covercache->uploadCover($record_id.'.jpg');
+                        $this->covercache->uploadFile($record_id.'.jpg', 'covers');
                         $this->call('aws:invalidate', ['paths' => ['/cover/200/'.$record_id.'.jpg']]);
                     }
                 } elseif (isset($record->upc)) {
@@ -70,7 +70,7 @@ class CacheCovers extends Command
                     }
                     if ($coverurl = $this->syndetics->getUpc($upc)->getCoverUrl()) {
                         $this->covercache->saveCover($coverurl, $record_id);
-                        $this->covercache->uploadCover($record_id.'.jpg');
+                        $this->covercache->uploadFile($record_id.'.jpg', 'covers');
                         $this->call('aws:invalidate', ['paths' => ['/cover/200/'.$record_id.'.jpg']]);
                     }
                 }

@@ -6,7 +6,7 @@ use AWS;
 use GuzzleHttp\Client;
 use IsoCodes\Isbn;
 
-class CoverCache
+class FileHandler
 {
     public function __construct()
     {
@@ -20,13 +20,15 @@ class CoverCache
         $response = $guzzle->request('GET', null, ['sink' => $cover_file]);
     }
 
-    public function uploadCover($cover_file)
+    public function uploadFile($file, $bucket, $path = NULL)
     {
         $s3 = AWS::createClient('s3');
+        $key = (isset($path) ? $path . $file : $file);
+        $key = str_replace('app/', '', $key);
         return $s3->putObject([
-            'Bucket'     => 'covers',
-            'Key'        => $cover_file,
-            'SourceFile' => storage_path($cover_file),
+            'Bucket'     => $bucket,
+            'Key'        => $key,
+            'SourceFile' => storage_path($file),
         ]);
     }
 }
