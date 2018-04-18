@@ -30,7 +30,7 @@
 <div class="form-group row">
     <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
     <div class="col-sm-6">
-        {{ Form::select('mat_type', $mat_types, ['class' => 'form-control', 'aria-describedby' => 'materialHelp']) }}
+        {{ Form::select('mat_code', $mat_types, ['class' => 'form-control', 'aria-describedby' => 'materialHelp']) }}
         <small id="materialHelp" class="form-text text-muted">Select the material type for this record.</small>
     </div>
 </div>
