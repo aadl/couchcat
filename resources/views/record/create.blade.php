@@ -23,42 +23,42 @@
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-6">
-        {{ Form::text('title', null , null, ['class' => 'form-control', 'aria-describedby' => 'titleHelp']) }}
+        {{ Form::text('title', null, ['class' => 'form-control', 'aria-describedby' => 'titleHelp']) }}
         <small id="titleHelp" class="form-text text-muted">Title of the record.</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
     <div class="col-sm-6">
-        {{ Form::select('mat_code', $mat_types, ['class' => 'form-control', 'aria-describedby' => 'materialHelp']) }}
+        {{ Form::select('mat_code', $mat_types, null, ['id' => 'mat_code', 'class' => 'form-control', 'aria-describedby' => 'materialHelp']) }}
         <small id="materialHelp" class="form-text text-muted">Select the material type for this record.</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="pub_year" class="col-sm-2 col-form-label">Pub Year</label>
     <div class="col-sm-6">
-        {{ Form::number('pub_year', null , null, ['class' => 'form-control', 'aria-describedby' => 'pubYearHelp']) }}
+        {{ Form::number('pub_year', null, ['class' => 'form-control', 'aria-describedby' => 'pubYearHelp']) }}
         <small id="pubYearHelp" class="form-text text-muted">Year this material was published.</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="cover" class="col-sm-2 col-form-label">Cover Image</label>
     <div class="col-sm-6">
-        {{ Form::file('cover', null, null, ['class' => 'form-control', 'aria-describedby' => 'coverHelp']) }}
+        {{ Form::file('cover', ['class' => 'form-control', 'aria-describedby' => 'coverHelp']) }}
         <small id="coverHelp" class="form-text text-muted">Attach a cover image.</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="attachment" class="col-sm-2 col-form-label">Record File(s)</label>
     <div class="col-sm-6">
-        {{ Form::file('attachment', null, null, ['class' => 'form-control', 'aria-describedby' => 'attachmentHelp']) }}
+        {{ Form::file('attachment', ['class' => 'form-control', 'aria-describedby' => 'attachmentHelp']) }}
         <small id="attachmentHelp" class="form-text text-muted">Attach a file relevant to the record (e.g., a pdf for a book download).</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="is_active" class="col-sm-2 col-form-label">Record Active</label>
     <div class="col-sm-6">
-        {{ Form::checkbox('is_active', null, true, ['class' => 'form-control', 'aria-describedby' => 'publicHelp']) }}
+        {{ Form::checkbox('is_active', null, true, ['aria-describedby' => 'publicHelp']) }}
         <small id="publicHelp" class="form-text text-muted">Uncheck if this should suppressed in the public catalog.</small>
     </div>
 </div>
