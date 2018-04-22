@@ -69,7 +69,7 @@ $(function() {
 
     $('#mat_code').change(function() {
         const matCode = $(this).val();
-        if (matCode == 'z' || matCode == 'za') {
+        if ((matCode == 'z' || matCode == 'za') && numTracks() == 1) {
             appendTrack();
         }
     });
