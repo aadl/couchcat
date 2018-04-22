@@ -62,7 +62,11 @@
         <small id="attachmentHelp" class="form-text text-muted">Attach a file relevant to the record (e.g., a pdf for a book download).</small>
     </div>
 </div>
-<button id="track-add" class="btn btn-primary no-display">Add Track</button>
+<div class="row form-group">
+    <div class="col-sm-6 offset-sm-2">
+        <button id="track-add" class="btn btn-secondary">Add Track</button>
+    </div>
+</div>
 <div class="form-group row">
     <label for="is_active" class="col-sm-2 col-form-label">Record Active</label>
     <div class="col-sm-6">
