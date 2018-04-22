@@ -59,6 +59,7 @@ class RecordController extends Controller
         $record->mat_code = $input['mat_code'];
         $record->pub_year = $input['pub_year'];
         $record->active = ($input['is_active'] ?? 0);
+        $record->notes = $input['notes'];
 
         // if attachments do extra validation on the file and then upload it
         if ($input['attachment']) {
@@ -75,8 +76,8 @@ class RecordController extends Controller
             $file_handler->uploadFile('app/' . $record->_id . $save_as, 'licensed', $path);
         }
 
-        if ($input['trak-file']) {
-            
+        if ($input['track-file']) {
+
         }
          
         if ($input['cover']) {
