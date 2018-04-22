@@ -13,7 +13,10 @@ $(function() {
 
     function appendTrack() {
         const trackCount = numTracks();
-        const appendTarget = $('#is_active').parents('.form-group');
+        const appendTarget = $('#track-add');
+
+        // display the add-track button
+        $('#track-add').css('display', 'initial');
 
         // create new row for form elements
         appendTarget.before($(document.createElement('div'))
@@ -53,9 +56,9 @@ $(function() {
               .addClass('col-sm-6')
         );
         target.children('div').append($(document.createElement('input')) 
-              .addClass('form-control')
+              .addClass('form-control form-group')
               .attr('id', 'add-track-' + trackCount)
-              .attr('name', 'track-title[]')
+              .attr('name', 'track-file[]')
               .attr('type', 'file')
         );
 
@@ -74,10 +77,14 @@ $(function() {
         }
     });
 
+    $('#track-add').click(function() {
+        appendTrack();
+        return false;
+    });
+
     $('form').on('click', '.track-delete', function() {
         const target = $(this).attr('data-target');
         $(target).fadeOut();
-
         return false;
     });
 

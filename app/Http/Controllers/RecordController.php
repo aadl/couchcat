@@ -74,6 +74,10 @@ class RecordController extends Controller
             $input['attachment']->storeAs('/', $record->_id . $save_as);
             $file_handler->uploadFile('app/' . $record->_id . $save_as, 'licensed', $path);
         }
+
+        if ($input['trak-file']) {
+            
+        }
          
         if ($input['cover']) {
             $input['cover']->storeAs('/', $record->_id . '.jpg');
