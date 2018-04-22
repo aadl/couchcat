@@ -28,6 +28,13 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label">Summary / Description</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('notes', null, ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
+        <small id="titleHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
+    </div>
+</div>
+<div class="form-group row">
     <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
     <div class="col-sm-6">
         {{ Form::select('mat_code', $mat_types, null, ['id' => 'mat_code', 'class' => 'form-control', 'aria-describedby' => 'materialHelp']) }}
