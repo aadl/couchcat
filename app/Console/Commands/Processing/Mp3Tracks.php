@@ -49,10 +49,10 @@ class Mp3Tracks extends Command
         $files = Storage::allFiles('music/'.$couchid .'/derivatives/tracks');
         foreach ($files as $file) {
             $parsepath = pathinfo($file);
-            if($parsepath['extension'] == 'mp3') {
+            if ($parsepath['extension'] == 'mp3') {
                 $audio = $this->ffmpeg->format(storage_path('app/'.$file));
                 $track_num = (int) substr($parsepath['filename'], 0, 2);
-                if($doc->tracks->$track_num) {
+                if (isset($doc->tracks->$track_num)) {
                     $doc->tracks->$track_num->filename = $parsepath['filename'] . '.mp3';
                     $doc->tracks->$track_num->size = (int) round($audio->get('size'));
                     $doc->tracks->$track_num->length = (int) round($audio->get('duration'));
