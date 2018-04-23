@@ -61,9 +61,16 @@ class RecordController extends Controller
         $record->active = ($input['is_active'] ?? 0);
         $record->notes = $input['notes'];
 
+        // grab and upload the cover image if provided
+        if (isset($input['cover'])) {
+            $input['cover']->storeAs('/', $record->_id . '.jpg');
+            $file_handler->uploadFile('app/' . $record->_id . '.jpg', 'covers');
+            Artisan::call('aws:invalidate', ['paths' => ['/cover/200/'.$record->_id.'.jpg']]);
+        }
+
+        $license_paths = config('license_paths');
         // if attachments do extra validation on the file and then upload it
-        if ($input['attachment']) {
-            $license_paths = config('license_paths');
+        if (isset($input['attachment'])) {
             if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
                 $allowed = 'pdf';
                 $save_as = '.pdf';
@@ -76,14 +83,12 @@ class RecordController extends Controller
             $file_handler->uploadFile('app/' . $record->_id . $save_as, 'licensed', $path);
         }
 
-        if ($input['track-file']) {
-
-        }
-         
-        if ($input['cover']) {
-            $input['cover']->storeAs('/', $record->_id . '.jpg');
-            $file_handler->uploadFile('app/' . $record->_id . '.jpg', 'covers');
-            Artisan::call('aws:invalidate', ['paths' => ['/cover/200/'.$record->_id.'.jpg']]);
+        if (isset($input['track-file'])) {
+            $are_tracks = true;
+            foreach ($input['track-file'] as $track) {
+                $track_num = (int) substr($track->getClientOriginalName(), 0, 2);
+                $record->tracks->$track_num = new \stdClass;
+            }
         }
 
         $couch = resolve('Couchdb');
@@ -91,6 +96,21 @@ class RecordController extends Controller
             $couch->storeDoc($record);
         } catch (Exception $e) {
             $this->error("Getting record failed : " . $e->getMessage());
+        }
+
+        // tracks need to be processed after an initial record is already created
+        if ($are_tracks) {
+            // $files = Storage::allFiles('music/'.$couchid .'/derivatives/tracks');
+            if ($input['mat_code'] == 'z' || $input['mat_code'] == 'za') {
+                $allowed = 'mp3';
+                // $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/derivatives/tracks/'
+                foreach ($input['track-file'] as $key => $track) {
+                    // $track->file = true;
+                    $track->storeAs('/music/' . $record->_id . '/derivatives/tracks', $track->getClientOriginalName());
+                    Artisan::call('process:mp3', ['couchid' => $record->_id]);
+                    Artisan::call('process:mp3:metadata', ['couchid' => $record->_id]);
+                }
+            }
         }
 
     }
