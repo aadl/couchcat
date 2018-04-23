@@ -8,7 +8,7 @@
 
 $(function() {
     function numTracks() {
-        return $('[id^=add-track-title]').length + 1;
+        return $('[id^=add-track-]').length + 1;
     };
 
     function appendTrack() {
@@ -17,28 +17,6 @@ $(function() {
 
         // display the add-track button
         $('#track-add').css('display', 'initial');
-
-        // create new row for form elements
-        appendTarget.before($(document.createElement('div'))
-                    .addClass('form-group row track-title-' + trackCount + ' track-' + trackCount)
-        );
-        let target = $('.track-title-' + trackCount);
-
-        // add label and input for track title
-        target.append($(document.createElement('label'))
-              .html('Track Title ' + trackCount)
-              .addClass('col-sm-2 col-form-label')
-              .attr('for', 'add-track-title-' + trackCount)
-        );
-        target.append($(document.createElement('div'))
-              .addClass('col-sm-6')
-        );
-        target.children('div').append($(document.createElement('input')) 
-              .addClass('form-control')
-              .attr('id', 'add-track-title-' + trackCount)
-              .attr('name', 'track-title[]')
-              .attr('type', 'text')
-        );
 
         // create new row for form elements
         appendTarget.before($(document.createElement('div'))
