@@ -46,7 +46,7 @@ class ProcessMp3 extends Command
         $doc = $this->couch->getDoc($couchid);
         $mp3 = new Mp3($doc);
 
-        $files = Storage::allFiles('music/'.$couchid .'/derivatives');
+        $files = Storage::allFiles('music/'.$couchid .'/derivatives/tracks');
         foreach ($files as $file) {
             if ($renamed = $mp3->fixMp3Filename($file)) {
                 $this->info($renamed);
