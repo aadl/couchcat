@@ -55,8 +55,8 @@
         <small id="coverHelp" class="form-text text-muted">Attach a cover image.</small>
     </div>
 </div>
-<div class="form-group row">
-    <label for="attachment" class="col-sm-2 col-form-label">Record File(s)</label>
+<div class="form-group row no-display">
+    <label for="attachment" class="col-sm-2 col-form-label">Record File</label>
     <div class="col-sm-6">
         {{ Form::file('attachment', ['id' => 'attachment', 'class' => 'form-control', 'aria-describedby' => 'attachmentHelp']) }}
         <small id="attachmentHelp" class="form-text text-muted">Attach a file relevant to the record (e.g., a pdf for a book download).</small>

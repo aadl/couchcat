@@ -51,7 +51,11 @@ $(function() {
     $('#mat_code').change(function() {
         const matCode = $(this).val();
         if ((matCode == 'z' || matCode == 'za') && numTracks() == 1) {
-            appendTrack();
+            $('#attachment').parents('.form-group').addClass('no-display');
+            $('#track-add').parents('.form-group').removeClass('no-display');
+        } else {
+            $('#attachment').parents('.form-group').removeClass('no-display');
+            $('#track-add').parents('.form-group').addClass('no-display');
         }
     });
 
