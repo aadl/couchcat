@@ -13,7 +13,7 @@ $(function() {
 
     function appendTrack() {
         const trackCount = numTracks();
-        const appendTarget = $('#track-add');
+        const appendTarget = $('#track-add').parents('.form-group');
 
         // display the add-track button
         $('#track-add').css('display', 'initial');
