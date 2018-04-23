@@ -30,7 +30,7 @@ class Mp3
         }
         if ($filename !== $safe_filename) {
             $old_file = $file;
-            $new_file = $parsepath['dirname'] . '/' . $safe_filename . '.flac';
+            $new_file = $parsepath['dirname'] . '/' . $safe_filename . '.mp3';
             if (Storage::move($old_file, $new_file)) {
                 return "Renamed $filename to $safe_filename";
             }
