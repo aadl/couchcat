@@ -134,7 +134,9 @@ class RecordController extends Controller
      */
     public function edit($id)
     {
-        //
+        $couch = resolve('Couchdb');
+        $record = $couch->getDoc($id);
+        return view('record.edit', compact('record'));
     }
 
     /**
