@@ -22,11 +22,11 @@ $(function() {
         appendTarget.before($(document.createElement('div'))
                     .addClass('form-group row track-file-' + trackCount + ' track-' + trackCount)
         );
-        target = $('.track-file-' + trackCount);
+        const target = $('.track-file-' + trackCount);
 
         // add label and input for track upload
         target.append($(document.createElement('label'))
-              .html('Track File ' + trackCount)
+              .html('Track ' + trackCount + ' File')
               .addClass('col-sm-2 col-form-label')
               .attr('for', 'add-track-' + trackCount)
         );
