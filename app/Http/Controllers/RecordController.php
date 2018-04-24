@@ -19,6 +19,35 @@ class RecordController extends Controller
         $this->couch = resolve('Couchdb');
         $this->mat_types = config('mat_types')['downloads'];
     }
+
+    private function process_form_file_uploads($files, $mat_code) 
+    {
+        $file_handler = new FileHandler;
+
+        // process and upload pdfs
+        if ($mat_code == 'zb' || $mat_code == 'zp') {
+            $save_as = '.pdf';
+            $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/';
+            $input['attachment']->storeAs('/', $record->_id . $save_as);
+            $file_handler->uploadFile('app/' . $record->_id . $save_as, 'licensed', $path);
+        }
+        
+        // process and upload audio files
+        if ($mat_code == 'z' || $mat_code == 'za') {
+            $allowed = 'mp3';
+            $this->validate($request, [
+                'track-file' => 'required|mimes:' . $allowed
+            ]);
+            $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/derivatives/';
+            foreach ($input['track-file'] as $key => $track) {
+                $track->storeAs('/music/' . $record->_id . '/derivatives/tracks', $track->getClientOriginalName());
+            }
+            Artisan::call('process:mp3', ['couchid' => $record->_id]);
+            Artisan::call('process:mp3:metadata', ['couchid' => $record->_id]);
+            $file_handler->uploadFile('app/music/' . $record->_id . '/derivatives/' . $record->_id . '.zip', 'licensed', $path);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -79,14 +108,11 @@ class RecordController extends Controller
         if (isset($input['attachment'])) {
             if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
                 $allowed = 'pdf';
-                $save_as = '.pdf';
-                $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/';
+                $this->validate($request, [
+                    'attachment' => 'required|mimes:' . $allowed
+                ]);
+                $this->process_form_file_uploads($input['attachment'], $input['mat_code']);
             }
-            $this->validate($request, [
-                'attachment' => 'required|mimes:' . $allowed
-            ]);
-            $input['attachment']->storeAs('/', $record->_id . $save_as);
-            $file_handler->uploadFile('app/' . $record->_id . $save_as, 'licensed', $path);
         }
 
         if (isset($input['track-file'])) {
@@ -103,25 +129,12 @@ class RecordController extends Controller
         try {
             $this->couch->storeDoc($record);
         } catch (Exception $e) {
-            $this->error("Getting record failed : " . $e->getMessage());
+            $this->error("Saving record failed : " . $e->getMessage());
         }
 
         // tracks need to be processed after an initial record is already created
         if ($are_tracks) {
-            // $files = Storage::allFiles('music/'.$couchid .'/derivatives/tracks');
-            if ($input['mat_code'] == 'z' || $input['mat_code'] == 'za') {
-                $allowed = 'mp3';
-                $this->validate($request, [
-                    'track-file' => 'required|mimes:' . $allowed
-                ]);
-                $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/derivatives/';
-                foreach ($input['track-file'] as $key => $track) {
-                    $track->storeAs('/music/' . $record->_id . '/derivatives/tracks', $track->getClientOriginalName());
-                }
-                Artisan::call('process:mp3', ['couchid' => $record->_id]);
-                Artisan::call('process:mp3:metadata', ['couchid' => $record->_id]);
-                $file_handler->uploadFile('app/music/' . $record->_id . '/derivatives/' . $record->_id . '.zip', 'licensed', $path);
-            }
+            $this->process_form_file_uploads($input['track-file'], $input['mat_code']);
         }
 
     }
@@ -159,7 +172,20 @@ class RecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $record = $this->couch->getDoc($id);
+        
+        $record->licensed_from = $input['license_slug'];
+        $record->title = $input['title'];
+        $record->mat_code = $input['mat_code'];
+        $record->notes = $input['notes'];
+
+        try {
+            $this->couch->storeDoc($record);
+        } catch (Exception $e) {
+            $this->error("Updating record failed : " . $e->getMessage());
+        }
+        // return redirect('record/' . $id);
     }
 
     /**
