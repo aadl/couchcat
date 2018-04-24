@@ -61,7 +61,7 @@
     <label for="cover" class="col-sm-2 col-form-label">Cover Image</label>
     <div class="col-sm-6">
         {{ Form::file('cover', ['id' => 'cover', 'class' => 'form-control', 'aria-describedby' => 'coverHelp']) }}
-        <small id="coverHelp" class="form-text text-muted">Attach a cover image.</small>
+        <small id="coverHelp" class="form-text text-muted">Attach a new cover image.</small>
     </div>
 </div>
 @if (strpos($record->mat_code, 'z') !== false)
