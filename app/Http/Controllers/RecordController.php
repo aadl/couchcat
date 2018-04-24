@@ -97,7 +97,7 @@ class RecordController extends Controller
         $record->licensed_from = $input['license_slug'];
         $record->mat_code = $input['mat_code'];
         $record->pub_year = $input['pub_year'];
-        $record->active = ($input['is_active'] ?? 0);
+        $record->active = ($input['is_active'] ? 1 : 0);
         $record->notes = $input['notes'];
 
         // grab and upload the cover image if provided
