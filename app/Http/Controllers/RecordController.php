@@ -118,7 +118,6 @@ class RecordController extends Controller
         }
 
         if (isset($input['track-file'])) {
-            $are_tracks = true;
             $allowed = 'mp3';
             $this->validate($request, [
                 'track-file' => 'required|mimes:' . $allowed
@@ -139,7 +138,7 @@ class RecordController extends Controller
         }
 
         // tracks need to be processed after an initial record is already created
-        if ($are_tracks) {
+        if (isset($input['track-file'])) {
             $this->process_form_file_uploads($input['track-file'], $record->_id, $input['mat_code'], $record->licensed_from);
         }
 
