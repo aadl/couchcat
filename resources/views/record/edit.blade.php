@@ -38,7 +38,7 @@
 <div class="form-group row">
     <label for="documentation" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
-        {{ Form::textarea('documentation', implode("\n\n", $record->documentation), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
+        {{ Form::textarea('documentation', implode("\n\n", $record->documentation), ['id' => 'documentation', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
         <small id="documentationHelp" class="form-text text-muted">Links to useful documentation for the record.</small>
     </div>
 </div>
