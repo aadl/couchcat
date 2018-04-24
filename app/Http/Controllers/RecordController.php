@@ -20,24 +20,28 @@ class RecordController extends Controller
         $this->mat_types = config('mat_types')['downloads'];
     }
 
-    private function process_form_file_uploads($files, $mat_code, $id, $licensed_from) 
+    private function process_form_file_uploads($files, $id, $mat_code = '', $licensed_from = '') 
     {
         $file_handler = new FileHandler;
         $license_paths = config('license_paths');
+
+        // process and upload cover
+        if ($mat_code == 'cover') {
+            $files->storeAs('/', $id . '.jpg');
+            $file_handler->uploadFile('app/' . $id . '.jpg', 'covers');
+            Artisan::call('aws:invalidate', ['paths' => ['/cover/200/' . $id . '.jpg']]);
+        }
+
         // process and upload pdfs
         if ($mat_code == 'zb' || $mat_code == 'zp') {
             $save_as = '.pdf';
             $path = $license_paths[$mat_code] . '/' . $licensed_from . '/';
-            $file->storeAs('/', $id . $save_as);
+            $files->storeAs('/', $id . $save_as);
             $file_handler->uploadFile('app/' . $id . $save_as, 'licensed', $path);
         }
         
         // process and upload audio files
         if ($mat_code == 'z' || $mat_code == 'za') {
-            $allowed = 'mp3';
-            $this->validate($request, [
-                'track-file' => 'required|mimes:' . $allowed
-            ]);
             $path = $license_paths[$mat_code] . '/' . $licensed_from . '/derivatives/';
             foreach ($files as $key => $track) {
                 $track->storeAs('/music/' . $id . '/derivatives/tracks', $track->getClientOriginalName());
@@ -98,9 +102,7 @@ class RecordController extends Controller
 
         // grab and upload the cover image if provided
         if (isset($input['cover'])) {
-            $input['cover']->storeAs('/', $record->_id . '.jpg');
-            $file_handler->uploadFile('app/' . $record->_id . '.jpg', 'covers');
-            Artisan::call('aws:invalidate', ['paths' => ['/cover/200/'.$record->_id.'.jpg']]);
+            $this->process_form_file_uploads($input['cover'], $record->_id, 'cover');
         }
 
         $license_paths = config('license_paths');
@@ -111,12 +113,16 @@ class RecordController extends Controller
                 $this->validate($request, [
                     'attachment' => 'required|mimes:' . $allowed
                 ]);
-                $this->process_form_file_uploads($input['attachment'], $input['mat_code'], $record->_id, $record->licensed_from);
+                $this->process_form_file_uploads($input['attachment'], $record->_id, $input['mat_code'], $record->licensed_from);
             }
         }
 
         if (isset($input['track-file'])) {
             $are_tracks = true;
+            $allowed = 'mp3';
+            $this->validate($request, [
+                'track-file' => 'required|mimes:' . $allowed
+            ]);
             foreach ($input['track-file'] as $track) {
                 $track_title = explode('.', $track->getClientOriginalName())[0];
                 $track_num = (int) substr($track_title, 0, 2);
@@ -134,7 +140,7 @@ class RecordController extends Controller
 
         // tracks need to be processed after an initial record is already created
         if ($are_tracks) {
-            $this->process_form_file_uploads($input['track-file'], $input['mat_code'], $record->_id, $record->licensed_from);
+            $this->process_form_file_uploads($input['track-file'], $record->_id, $input['mat_code'], $record->licensed_from);
         }
 
     }
