@@ -16,21 +16,21 @@
 <div class="form-group row">
     <label for="license_slug" class="col-sm-2 col-form-label">License Name</label>
     <div class="col-sm-6">
-        {{ Form::text('license_slug', $record->licensed_from, ['id' => 'license_slug', 'class' => 'form-control', 'aria-describedby' => 'licenseHelp']) }}
+        {{ Form::text('license_slug', ($record->licensed_from ?? ''), ['id' => 'license_slug', 'class' => 'form-control', 'aria-describedby' => 'licenseHelp']) }}
         <small id="licenseHelp" class="form-text text-muted">Create new licenses on the licenses page.</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-6">
-        {{ Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'aria-describedby' => 'titleHelp']) }}
+        {{ Form::text('title', $record->title, ['id' => 'title', 'class' => 'form-control', 'aria-describedby' => 'titleHelp']) }}
         <small id="titleHelp" class="form-text text-muted">Title of the record.</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
-        {{ Form::textarea('notes', $record->notes, ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
+        {{ Form::textarea('notes', ($record->notes ?? ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
         <small id="titleHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
@@ -55,14 +55,14 @@
         <small id="coverHelp" class="form-text text-muted">Attach a cover image.</small>
     </div>
 </div>
-<div class="form-group row no-display">
+<div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
     <label for="attachment" class="col-sm-2 col-form-label">Record File</label>
     <div class="col-sm-6">
         {{ Form::file('attachment', ['id' => 'attachment', 'class' => 'form-control', 'aria-describedby' => 'attachmentHelp']) }}
         <small id="attachmentHelp" class="form-text text-muted">Attach a file relevant to the record (e.g., a pdf for a book download).</small>
     </div>
 </div>
-<div class="row form-group">
+<div class="row form-group @if ($record->mat_code != 'z' || $record->mat_code != 'za')no-display @endif">
     <div class="col-sm-6 offset-sm-2">
         <button id="track-add" class="btn btn-secondary">Add Track</button>
     </div>
