@@ -20,16 +20,16 @@ class RecordController extends Controller
         $this->mat_types = config('mat_types')['downloads'];
     }
 
-    private function process_form_file_uploads($files, $mat_code) 
+    private function process_form_file_uploads($files, $mat_code, $id, $licensed_from) 
     {
         $file_handler = new FileHandler;
-
+        $license_paths = config('license_paths');
         // process and upload pdfs
         if ($mat_code == 'zb' || $mat_code == 'zp') {
             $save_as = '.pdf';
-            $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/';
-            $input['attachment']->storeAs('/', $record->_id . $save_as);
-            $file_handler->uploadFile('app/' . $record->_id . $save_as, 'licensed', $path);
+            $path = $license_paths[$mat_code] . '/' . $licensed_from . '/';
+            $file->storeAs('/', $id . $save_as);
+            $file_handler->uploadFile('app/' . $id . $save_as, 'licensed', $path);
         }
         
         // process and upload audio files
@@ -38,13 +38,13 @@ class RecordController extends Controller
             $this->validate($request, [
                 'track-file' => 'required|mimes:' . $allowed
             ]);
-            $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/derivatives/';
-            foreach ($input['track-file'] as $key => $track) {
-                $track->storeAs('/music/' . $record->_id . '/derivatives/tracks', $track->getClientOriginalName());
+            $path = $license_paths[$mat_code] . '/' . $licensed_from . '/derivatives/';
+            foreach ($files as $key => $track) {
+                $track->storeAs('/music/' . $id . '/derivatives/tracks', $track->getClientOriginalName());
             }
-            Artisan::call('process:mp3', ['couchid' => $record->_id]);
-            Artisan::call('process:mp3:metadata', ['couchid' => $record->_id]);
-            $file_handler->uploadFile('app/music/' . $record->_id . '/derivatives/' . $record->_id . '.zip', 'licensed', $path);
+            Artisan::call('process:mp3', ['couchid' => $id]);
+            Artisan::call('process:mp3:metadata', ['couchid' => $id]);
+            $file_handler->uploadFile('app/music/' . $id . '/derivatives/' . $id . '.zip', 'licensed', $path);
         }
     }
 
@@ -111,7 +111,7 @@ class RecordController extends Controller
                 $this->validate($request, [
                     'attachment' => 'required|mimes:' . $allowed
                 ]);
-                $this->process_form_file_uploads($input['attachment'], $input['mat_code']);
+                $this->process_form_file_uploads($input['attachment'], $input['mat_code'], $record->_id, $record->licensed_from);
             }
         }
 
@@ -134,7 +134,7 @@ class RecordController extends Controller
 
         // tracks need to be processed after an initial record is already created
         if ($are_tracks) {
-            $this->process_form_file_uploads($input['track-file'], $input['mat_code']);
+            $this->process_form_file_uploads($input['track-file'], $input['mat_code'], $record->_id, $record->licensed_from);
         }
 
     }
