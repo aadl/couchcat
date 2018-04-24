@@ -30,7 +30,7 @@
 <div class="form-group row">
     <label for="notes" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
-        {{ Form::textarea('notes', ($record->notes ? implode("\n\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
+        {{ Form::textarea('notes', (isset($record->notes) ? implode("\n\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
         <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
@@ -72,7 +72,6 @@
         <small id="attachmentHelp" class="form-text text-muted">Attach a file relevant to the record (e.g., a pdf for a book download).</small>
     </div>
 </div>
-@endif
 <div class="row form-group @if ($record->mat_code != 'z' || $record->mat_code != 'za')no-display @endif">
     <div class="col-sm-6 offset-sm-2">
         <button id="track-add" class="btn btn-secondary">Add Track</button>
