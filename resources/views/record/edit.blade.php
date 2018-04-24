@@ -28,18 +28,18 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label">Summary / Description</label>
+    <label for="notes" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
         {{ Form::textarea('notes', ($record->notes ? implode("\n\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
-        <small id="titleHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
+        <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
 @if (isset($record->documentation))
 <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label">Summary / Description</label>
+    <label for="documentation" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
-        {{ Form::textarea('documentation', implode("\n\n", $record->documentation), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
-        <small id="titleHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
+        {{ Form::textarea('documentation', implode("\n\n", $record->documentation), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
+        <small id="documentationHelp" class="form-text text-muted">Links to useful documentation for the record.</small>
     </div>
 </div>
 @endif
