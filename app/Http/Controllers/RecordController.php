@@ -13,6 +13,12 @@ use Illuminate\Validation\Rule;
 
 class RecordController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->couch = resolve('Couchdb');
+        $this->mat_types = config('mat_types')['downloads'];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +36,7 @@ class RecordController extends Controller
      */
     public function create(Request $request)
     {
-        $mat_types = config('mat_types')['downloads'];
+        $mat_types = $this->mat_types;
         $license_slug = $request->input('license_slug') ?? '';
         return view('record.create', compact('mat_types', 'license_slug'));
     }
@@ -86,14 +92,16 @@ class RecordController extends Controller
         if (isset($input['track-file'])) {
             $are_tracks = true;
             foreach ($input['track-file'] as $track) {
-                $track_num = (int) substr($track->getClientOriginalName(), 0, 2);
+                $track_title = explode('.', $track->getClientOriginalName())[0];
+                $track_num = (int) substr($track_title, 0, 2);
+                $track_title = substr($track_title, 2);
                 $record->tracks->$track_num = new \stdClass;
+                $record->tracks->$track_num->title = $track_title;
             }
         }
 
-        $couch = resolve('Couchdb');
         try {
-            $couch->storeDoc($record);
+            $this->couch->storeDoc($record);
         } catch (Exception $e) {
             $this->error("Getting record failed : " . $e->getMessage());
         }
@@ -103,13 +111,16 @@ class RecordController extends Controller
             // $files = Storage::allFiles('music/'.$couchid .'/derivatives/tracks');
             if ($input['mat_code'] == 'z' || $input['mat_code'] == 'za') {
                 $allowed = 'mp3';
-                // $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/derivatives/tracks/'
+                $this->validate($request, [
+                    'track-file' => 'required|mimes:' . $allowed
+                ]);
+                $path = $license_paths[$input['mat_code']] . '/' . $record->licensed_from . '/derivatives/';
                 foreach ($input['track-file'] as $key => $track) {
-                    // $track->file = true;
                     $track->storeAs('/music/' . $record->_id . '/derivatives/tracks', $track->getClientOriginalName());
-                    Artisan::call('process:mp3', ['couchid' => $record->_id]);
-                    Artisan::call('process:mp3:metadata', ['couchid' => $record->_id]);
                 }
+                Artisan::call('process:mp3', ['couchid' => $record->_id]);
+                Artisan::call('process:mp3:metadata', ['couchid' => $record->_id]);
+                $file_handler->uploadFile('app/music/' . $record->_id . '/derivatives/' . $record->_id . '.zip', 'licensed', $path);
             }
         }
 
@@ -134,9 +145,9 @@ class RecordController extends Controller
      */
     public function edit($id)
     {
-        $couch = resolve('Couchdb');
-        $record = $couch->getDoc($id);
-        return view('record.edit', compact('record'));
+        $mat_types = $this->mat_types;
+        $record = $this->couch->getDoc($id);
+        return view('record.edit', compact('mat_types', 'record'));
     }
 
     /**
