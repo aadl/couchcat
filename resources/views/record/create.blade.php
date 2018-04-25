@@ -27,6 +27,20 @@
         <small id="titleHelp" class="form-text text-muted">Title of the record.</small>
     </div>
 </div>
+<div class="form-group row no-display">
+    <label for="title" class="col-sm-2 col-form-label">Author</label>
+    <div class="col-sm-6">
+        {{ Form::text('author', null, ['id' => 'author', 'class' => 'form-control', 'aria-describedby' => 'authorHelp']) }}
+        <small id="authorHelp" class="form-text text-muted">Author.</small>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label">Artist</label>
+    <div class="col-sm-6">
+        {{ Form::text('artist', null, ['id' => 'artist', 'class' => 'form-control', 'aria-describedby' => 'artistHelp']) }}
+        <small id="artistHelp" class="form-text text-muted">Artist.</small>
+    </div>
+</div>
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
