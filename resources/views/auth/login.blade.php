@@ -44,6 +44,7 @@
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
+                                    <small id="rememberHelp" class="form-text text-muted">Don't check this on shared public desk machines.</small>
                                 </label>
                             </div>
                         </div>
