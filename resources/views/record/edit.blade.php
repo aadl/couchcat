@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add a Record')
+@section('title', 'Edit a Record')
 
 @section('content')
 @if (count($errors) > 0)
