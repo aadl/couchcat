@@ -56,6 +56,32 @@ class RecordController extends Controller
         }
     }
 
+    private function process_record($record = NULL, $input) {
+
+        if (!$record) {
+            $record = new \stdClass;
+            $record->_id = str_slug($input['title'], '-');
+            $record->bib_created = date('Y-m-d');
+        }
+
+        $record->bib_lastupdate = date('Y-m-d');
+        $record->title = $input['title'];
+        if (isset($input['license_slug'])) {
+           $record->licensed_from = $input['license_slug']; 
+        }
+        $record->mat_code = $input['mat_code'];
+        $record->pub_year = $input['pub_year'];
+        if (isset($input['notes'])) {
+           $record->notes = explode("\n\n", $input['notes']); 
+        }
+        $record->active = (isset($input['is_active']) ? 1 : 0);
+        if (isset($input['documentation'])) {
+            $record->documentation = explode("\n\n", $input['notes']);
+        }
+
+        return $record;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -96,16 +122,7 @@ class RecordController extends Controller
         $input = $request->all();
 
         // create new record object and assign fields
-        $record = new \stdClass;
-        $record->_id = str_slug($input['title'], '-');
-        $record->bib_created = date('Y-m-d');
-        $record->bib_lastupdate = date('Y-m-d');
-        $record->title = $input['title'];
-        $record->licensed_from = $input['license_slug'];
-        $record->mat_code = $input['mat_code'];
-        $record->pub_year = $input['pub_year'];
-        $record->active = (isset($input['is_active']) ? 1 : 0);
-        $record->notes = explode("\n\n", $input['notes']);
+        $record = process_record(NULL, $input);
 
         // grab and upload the cover image if provided
         if (isset($input['cover'])) {
@@ -197,16 +214,8 @@ class RecordController extends Controller
         $input = $request->all();
         $record = $this->couch->getDoc($id);
         
-        $record->bib_lastupdate = date('Y-m-d');
-        $record->licensed_from = $input['license_slug'];
-        $record->title = $input['title'];
-        $record->mat_code = $input['mat_code'];
-        $record->pub_year = $input['pub_year'];
-        $record->active = (isset($input['is_active']) ? 1 : 0);
-        $record->notes = explode("\n\n", $input['notes']);
-        if (isset($input['documentation'])) {
-            $record->documentation = explode("\n\n", $input['notes']);
-        }
+        $record = process_record($record, $input);
+        
 
         if (isset($input['attachment'])) {
             if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
