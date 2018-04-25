@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-{{ print_r($errors) }}
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -14,9 +13,11 @@
                         <div class="form-group row">
                             <label for="username" class="col-sm-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="input-group col-md-6">
                                 <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-
+                                <div class="input-group-append">
+                                          <div class="input-group-text">@aadl.org</div>
+                                </div>
                                 @if ($errors->has('username'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('username') }}</strong>
