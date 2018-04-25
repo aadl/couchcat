@@ -89,7 +89,6 @@ class RecordController extends Controller
         ]);
 
         $input = $request->all();
-        $file_handler = new FileHandler;
 
         // create new record object and assign fields
         $record = new \stdClass;
