@@ -16,7 +16,8 @@
 <div class="form-group row">
     <label for="license_slug" class="col-sm-2 col-form-label">License Name</label>
     <div class="col-sm-6">
-        {{ Form::text('license_slug', $license_slug, ['id' => 'license_slug', 'class' => 'form-control', 'aria-describedby' => 'licenseHelp']) }}
+        <!-- {{ Form::text('license_slug', $license_slug, ['id' => 'license_slug', 'class' => 'form-control', 'aria-describedby' => 'licenseHelp']) }} -->
+        {{ Form::select('license_slug', $licenses, $license_slug, ['id' => 'license_slug', 'class' => 'form-control', 'aria-describedby' => 'licenseHelpHelp']) }}
         <small id="licenseHelp" class="form-text text-muted">Create new licenses on the licenses page.</small>
     </div>
 </div>

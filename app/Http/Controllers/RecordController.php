@@ -18,6 +18,7 @@ class RecordController extends Controller
     {
         $this->couch = resolve('Couchdb');
         $this->mat_types = config('mat_types');
+        $this->licenses = License::all()->pluck('license_slug');
     }
 
     private function process_form_file_uploads($files, $id, $mat_code = '', $licensed_from = '') 
@@ -70,8 +71,9 @@ class RecordController extends Controller
     public function create(Request $request)
     {
         $mat_types = $this->mat_types['downloads'];
+        $licenses = $this->licenses;
         $license_slug = $request->input('license_slug') ?? '';
-        return view('record.create', compact('mat_types', 'license_slug'));
+        return view('record.create', compact('mat_types', 'licenses', 'license_slug'));
     }
 
     /**
