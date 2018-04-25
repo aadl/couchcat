@@ -10,11 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::resource('license', 'LicenseController');
-Route::resource('vendor', 'VendorController');
-Route::get('/', 'VendorController@welcome');
-Route::resource('record', 'RecordController');
-Route::get('harvest/cover', 'HarvestController@cacheCover');
-
 Auth::routes();
+
+Route::get('/', 'VendorController@welcome');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('license', 'LicenseController');
+    Route::resource('vendor', 'VendorController');
+    Route::resource('record', 'RecordController');
+});
+
+Route::get('harvest/cover', 'HarvestController@cacheCover');
