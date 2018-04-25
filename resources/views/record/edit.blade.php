@@ -74,11 +74,30 @@
         <small id="attachmentHelp" class="form-text text-muted">Attach a file relevant to the record (e.g., a pdf for a book download).</small>
     </div>
 </div>
-<div class="row form-group @if ($record->mat_code != 'z' || $record->mat_code != 'za')no-display @endif">
+@endif
+@if (isset($record->tracks))
+    <div>
+        <fieldset>
+            <legend>Tracks</legend>
+            @foreach ($record->tracks as $num => $track)
+                <div class="row form-group">
+                    <label for="edit-track-title-{{ $num }}" class="col-sm-2 col-form-label">Track {{ $num }} Title</label>
+                    <div class="col-sm-6">
+                        {{ Form::text('edit-track-title[]', $track->title, ['id' => 'edit-track-title-' . $num, 'class' => 'form-control', 'aria-describedby' => 'trackTitleHelp']) }}
+                        <small id="trackTitleHelp" class="form-text text-muted">Title of the track.</small>
+                    </div>
+                </div>
+            @endforeach
+        </fieldset>
+    </div>    
+@endif
+@if ($record->mat_code == 'z' || $record->mat_code == 'za')
+<div class="row form-group">
     <div class="col-sm-6 offset-sm-2">
         <button id="track-add" class="btn btn-secondary">Add Track</button>
     </div>
 </div>
+@endif
 <div class="form-group row">
     <label for="is_active" class="col-sm-2 col-form-label">Record Active</label>
     <div class="col-sm-6">
