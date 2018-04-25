@@ -22,6 +22,7 @@
         "adldap2/adldap2-laravel": "^4.0",
         "aws/aws-sdk-php-laravel": "^3.1",
         "comodojo/zip": "^2.1",
+        "czproject/git-php": "^3.14",
         "fideloper/proxy": "~4.0",
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.3",
