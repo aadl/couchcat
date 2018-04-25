@@ -15,6 +15,13 @@
               <li class="nav-item"><a class="nav-link" href="/vendor">Vendors</a></li>
               <li class="nav-item"><a class="nav-link" href="/license">Licenses</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (Auth::guest())
+                    <li class="nav-item"><a href="{{ url('/login') }}" class="nav-link">Login</a></li>
+                @else
+                    <li class="nav-item navbar-text">{{ Auth::user()->name }} | <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a> <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
+                @endif
+            </ul>
             </nav>
         </header>
         <main role="main" class="container">

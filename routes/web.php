@@ -16,3 +16,5 @@ Route::resource('vendor', 'VendorController');
 Route::get('/', 'VendorController@welcome');
 Route::resource('record', 'RecordController');
 Route::get('harvest/cover', 'HarvestController@cacheCover');
+
+Auth::routes();
