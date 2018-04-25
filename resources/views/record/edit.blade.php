@@ -13,6 +13,7 @@
     </div>
 @endif
 {{ Form::open(array('route' => ['record.update', $record->_id], 'method' => 'PATCH')) }}
+@if (strpos($record->mat_code, 'z') !== false)
 <div class="form-group row">
     <label for="license_slug" class="col-sm-2 col-form-label">License Name</label>
     <div class="col-sm-6">
@@ -20,6 +21,7 @@
         <small id="licenseHelp" class="form-text text-muted">Create new licenses on the licenses page.</small>
     </div>
 </div>
+@endif
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-6">
