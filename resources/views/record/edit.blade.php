@@ -28,12 +28,21 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label">Summary / Description</label>
+    <label for="notes" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
-        {{ Form::textarea('notes', ($record->notes ?? ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
-        <small id="titleHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
+        {{ Form::textarea('notes', (isset($record->notes) ? implode("\n\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
+        <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
+@if (isset($record->documentation))
+<div class="form-group row">
+    <label for="documentation" class="col-sm-2 col-form-label">Summary / Description</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('documentation', implode("\n\n", $record->documentation), ['id' => 'documentation', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
+        <small id="documentationHelp" class="form-text text-muted">Links to useful documentation for the record.</small>
+    </div>
+</div>
+@endif
 <div class="form-group row">
     <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
     <div class="col-sm-6">
@@ -44,7 +53,7 @@
 <div class="form-group row">
     <label for="pub_year" class="col-sm-2 col-form-label">Pub Year</label>
     <div class="col-sm-6">
-        {{ Form::number('pub_year', $record->pub_year, ['id' => 'pub_year', 'class' => 'form-control', 'aria-describedby' => 'pubYearHelp']) }}
+        {{ Form::number('pub_year', ($record->pub_year ?? ''), ['id' => 'pub_year', 'class' => 'form-control', 'aria-describedby' => 'pubYearHelp']) }}
         <small id="pubYearHelp" class="form-text text-muted">Year this material was published.</small>
     </div>
 </div>
@@ -52,9 +61,10 @@
     <label for="cover" class="col-sm-2 col-form-label">Cover Image</label>
     <div class="col-sm-6">
         {{ Form::file('cover', ['id' => 'cover', 'class' => 'form-control', 'aria-describedby' => 'coverHelp']) }}
-        <small id="coverHelp" class="form-text text-muted">Attach a cover image.</small>
+        <small id="coverHelp" class="form-text text-muted">Attach a new cover image.</small>
     </div>
 </div>
+@if (strpos($record->mat_code, 'z') !== false)
 <div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
     <label for="attachment" class="col-sm-2 col-form-label">Record File</label>
     <div class="col-sm-6">
