@@ -18,7 +18,10 @@ class RecordController extends Controller
     {
         $this->couch = resolve('Couchdb');
         $this->mat_types = config('mat_types');
-        $this->licenses = License::all()->pluck('license_slug');
+        $licenses = License::all()->mapWithKeys(function($license) {
+            return [$license['license_slug'] => $license['license_slug']];
+        })->all();
+        $this->licenses = array_merge([''], $licenses);
     }
 
     private function process_form_file_uploads($files, $id, $mat_code = '', $licensed_from = '') 
@@ -168,12 +171,13 @@ class RecordController extends Controller
     public function edit($id)
     {
         $mat_types = array_merge($this->mat_types['physical'], $this->mat_types['downloads']);
+        $licenses = $this->licenses;
         $record = $this->couch->getDoc($id);
         if (isset($record->tracks)) {
             $record->tracks = (array) $record->tracks;
             ksort($record->tracks);
         }
-        return view('record.edit', compact('mat_types', 'record'));
+        return view('record.edit', compact('mat_types', 'licenses', 'record'));
     }
 
     /**
