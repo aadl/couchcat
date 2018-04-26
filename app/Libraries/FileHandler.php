@@ -23,7 +23,8 @@ class FileHandler
     public function uploadFile($file, $bucket, $path = NULL)
     {
         $s3 = AWS::createClient('s3');
-        $key = (isset($path) ? $path . $file : $file);
+        $split = explode('/', $file);
+        $key = (isset($path) ? $path . end($split) : $file);
         $key = str_replace('app/', '', $key);
         return $s3->putObject([
             'Bucket'     => $bucket,

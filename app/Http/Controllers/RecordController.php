@@ -47,10 +47,13 @@ class RecordController extends Controller
         
         // process and upload audio files
         if ($mat_code == 'z' || $mat_code == 'za') {
-            $path = $license_paths[$mat_code] . '/' . $licensed_from . '/derivatives/';
+            $path = $license_paths[$mat_code] . '/' . $licensed_from . '/' . $id . '/derivatives/';
+            
             foreach ($files as $key => $track) {
-                $track->storeAs('/music/' . $id . '/derivatives/tracks', $track->getClientOriginalName());
-                $file_handler->uploadFile('app/music/' . $id . '/derivatives/' . $id . '.mp3', 'licensed', $path . 'tracks/');
+                $track_split = explode('.', $track->getClientOriginalName())[0];
+                $track_name = str_slug($track_split, '-') . '.mp3';
+                $track->storeAs("music/$id/derivatives/tracks", $track_name);
+                $file_handler->uploadFile("app/music/$id/derivatives/tracks/$track_name", 'licensed', $path . 'tracks/');
             }
             Artisan::call('process:mp3', ['couchid' => $id]);
             Artisan::call('process:mp3:metadata', ['couchid' => $id]);
@@ -110,6 +113,23 @@ class RecordController extends Controller
                     'attachment' => 'required|mimes:' . $allowed
                 ]);
                 $this->process_form_file_uploads($input['attachment'], $record->_id, $input['mat_code'], $record->licensed_from);
+            }
+        }
+
+        if (isset($input['track-file'])) {
+            $allowed = 'mp3';
+            // $this->validate($request, [
+            //     'track-file' => 'required|mimes:' . $allowed
+            // ]);
+            foreach ($input['track-file'] as $track) {
+                $track_title = explode('.', $track->getClientOriginalName())[0];
+                $track_num = (int) substr($track_title, 0, 2);
+                $track_title = substr($track_title, 2);
+                if (!isset($record->tracks)) {
+                    $record->tracks = new \stdClass;
+                }
+                $record->tracks->$track_num = new \stdClass;
+                $record->tracks->$track_num->title = $track_title;
             }
         }
 
@@ -197,7 +217,7 @@ class RecordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {     
+    {
         $this->process_record($id, $request);
         // return redirect('record/' . $id);
     }
