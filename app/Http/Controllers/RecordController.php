@@ -77,6 +77,12 @@ class RecordController extends Controller
 
         $record->bib_lastupdate = date('Y-m-d');
         $record->title = $input['title'];
+        if (isset($input['author'])) {
+            $record->author = $input['author'];
+        }
+        if (isset($input['artist'])) {
+            $record->artist = $input['artist'];
+        }
         if (isset($input['license_slug'])) {
            $record->licensed_from = $input['license_slug']; 
         }
@@ -92,7 +98,6 @@ class RecordController extends Controller
 
         // grab and upload the cover image if provided
         if (isset($input['cover'])) {
-            dd($input['cover']);
             $this->process_form_file_uploads($input['cover'], $record->_id, 'cover');
         }
 
