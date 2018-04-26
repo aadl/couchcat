@@ -21,7 +21,8 @@ class RecordController extends Controller
         $licenses = License::all()->mapWithKeys(function($license) {
             return [$license['license_slug'] => $license['license_slug']];
         })->all();
-        $this->licenses = array_merge([''], $licenses);
+        // give blank option empty key so it won't be counted as set if no license selected
+        $this->licenses = array_merge(['' => ''], $licenses);
     }
 
     private function process_form_file_uploads($files, $id, $mat_code = '', $licensed_from = '') 
@@ -49,6 +50,7 @@ class RecordController extends Controller
             $path = $license_paths[$mat_code] . '/' . $licensed_from . '/derivatives/';
             foreach ($files as $key => $track) {
                 $track->storeAs('/music/' . $id . '/derivatives/tracks', $track->getClientOriginalName());
+                $file_handler->uploadFile('app/music/' . $id . '/derivatives/' . $id . '.mp3', 'licensed', $path . 'tracks/');
             }
             Artisan::call('process:mp3', ['couchid' => $id]);
             Artisan::call('process:mp3:metadata', ['couchid' => $id]);
@@ -56,12 +58,21 @@ class RecordController extends Controller
         }
     }
 
-    private function process_record($record = NULL, $input) {
+    private function process_record($id = NULL, $request) 
+    {
+        $this->validate($request, [
+            'cover' => 'sometimes|nullable|mimes:jpg,jpeg',
+            'title' => 'required'
+        ]);
 
-        if (!$record) {
+        $input = $request->all();
+
+        if (!$id) {
             $record = new \stdClass;
             $record->_id = str_slug($input['title'], '-');
             $record->bib_created = date('Y-m-d');
+        } else {
+            $record = $this->couch->getDoc($id);
         }
 
         $record->bib_lastupdate = date('Y-m-d');
@@ -79,7 +90,34 @@ class RecordController extends Controller
             $record->documentation = explode("\n\n", $input['notes']);
         }
 
-        return $record;
+        // grab and upload the cover image if provided
+        if (isset($input['cover'])) {
+            dd($input['cover']);
+            $this->process_form_file_uploads($input['cover'], $record->_id, 'cover');
+        }
+
+        $license_paths = config('license_paths');
+        // if attachments do extra validation on the file and then upload it
+        if (isset($input['attachment'])) {
+            if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
+                $allowed = 'pdf';
+                $this->validate($request, [
+                    'attachment' => 'required|mimes:' . $allowed
+                ]);
+                $this->process_form_file_uploads($input['attachment'], $record->_id, $input['mat_code'], $record->licensed_from);
+            }
+        }
+
+        try {
+            $this->couch->storeDoc($record);
+        } catch (Exception $e) {
+            $this->error("Saving record failed : " . $e->getMessage());
+        }
+
+        // tracks need to be processed after an initial record fields are already processed
+        if (isset($input['track-file'])) {
+            $this->process_form_file_uploads($input['track-file'], $record->_id, $input['mat_code'], $record->licensed_from);
+        }
     }
 
     /**
@@ -113,59 +151,8 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'license_slug' => 'required',
-            'cover' => 'sometimes|mimes:jpg,jpeg'
-        ]);
-
-        $input = $request->all();
-
-        // create new record object and assign fields
-        $record = process_record(NULL, $input);
-
-        // grab and upload the cover image if provided
-        if (isset($input['cover'])) {
-            $this->process_form_file_uploads($input['cover'], $record->_id, 'cover');
-        }
-
-        $license_paths = config('license_paths');
-        // if attachments do extra validation on the file and then upload it
-        if (isset($input['attachment'])) {
-            if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
-                $allowed = 'pdf';
-                $this->validate($request, [
-                    'attachment' => 'required|mimes:' . $allowed
-                ]);
-                $this->process_form_file_uploads($input['attachment'], $record->_id, $input['mat_code'], $record->licensed_from);
-            }
-        }
-
-        if (isset($input['track-file'])) {
-            $allowed = 'mp3';
-            $this->validate($request, [
-                'track-file' => 'required|mimes:' . $allowed
-            ]);
-            foreach ($input['track-file'] as $track) {
-                $track_title = explode('.', $track->getClientOriginalName())[0];
-                $track_num = (int) substr($track_title, 0, 2);
-                $track_title = substr($track_title, 2);
-                $record->tracks->$track_num = new \stdClass;
-                $record->tracks->$track_num->title = $track_title;
-            }
-        }
-
-        try {
-            $this->couch->storeDoc($record);
-        } catch (Exception $e) {
-            $this->error("Saving record failed : " . $e->getMessage());
-        }
-
-        // tracks need to be processed after an initial record is already created
-        if (isset($input['track-file'])) {
-            $this->process_form_file_uploads($input['track-file'], $record->_id, $input['mat_code'], $record->licensed_from);
-        }
-
+        $this->process_record(NULL, $request);
+        // return redirect('record/' . $id);
     }
 
     /**
@@ -205,53 +192,8 @@ class RecordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'title' => 'required',
-            'cover' => 'sometimes|mimes:jpg,jpeg'
-        ]);
-
-        $input = $request->all();
-        $record = $this->couch->getDoc($id);
-        
-        $record = process_record($record, $input);
-        
-
-        if (isset($input['attachment'])) {
-            if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
-                $allowed = 'pdf';
-                $this->validate($request, [
-                    'attachment' => 'required|mimes:' . $allowed
-                ]);
-                $this->process_form_file_uploads($input['attachment'], $record->_id, $input['mat_code'], $record->licensed_from);
-            }
-        }
-
-        if (isset($input['track-file'])) {
-            $allowed = 'mp3';
-            $this->validate($request, [
-                'track-file' => 'required|mimes:' . $allowed
-            ]);
-            foreach ($input['track-file'] as $track) {
-                $track_title = explode('.', $track->getClientOriginalName())[0];
-                $track_num = (int) substr($track_title, 0, 2);
-                $track_title = substr($track_title, 2);
-                $record->tracks->$track_num = new \stdClass;
-                $record->tracks->$track_num->title = $track_title;
-            }
-        }
-
-        try {
-            $this->couch->storeDoc($record);
-        } catch (Exception $e) {
-            $this->error("Updating record failed : " . $e->getMessage());
-        }
-
-        // tracks need to be processed after an initial record is already created
-        if (isset($input['track-file'])) {
-            $this->process_form_file_uploads($input['track-file'], $record->_id, $input['mat_code'], $record->licensed_from);
-        }
-
+    {     
+        $this->process_record($id, $request);
         // return redirect('record/' . $id);
     }
 
