@@ -12,7 +12,7 @@
         </ul>
     </div>
 @endif
-{{ Form::open(array('route' => ['record.update', $record->_id], 'method' => 'PATCH')) }}
+{{ Form::open(array('route' => ['record.update', $record->_id], 'files' => true, 'method' => 'PATCH')) }}
 @if (strpos($record->mat_code, 'z') !== false)
 <div class="form-group row">
     <label for="license_slug" class="col-sm-2 col-form-label">License Name</label>
@@ -25,7 +25,7 @@
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-6">
-        {{ Form::text('title', $record->title, ['id' => 'title', 'class' => 'form-control', 'aria-describedby' => 'titleHelp']) }}
+        {{ Form::text('title', $record->title, ['id' => 'title', 'class' => 'form-control', 'aria-describedby' => 'titleHelp', 'required' => true]) }}
         <small id="titleHelp" class="form-text text-muted">Title of the record.</small>
     </div>
 </div>
