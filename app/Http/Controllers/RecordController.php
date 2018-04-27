@@ -206,7 +206,8 @@ class RecordController extends Controller
             $record->tracks = (array) $record->tracks;
             ksort($record->tracks);
         }
-        return view('record.edit', compact('mat_types', 'licenses', 'record'));
+        $protect_evg_fields = (strpos($record->mat_code, 'z') !== false) ? '' : 'disabled';
+        return view('record.edit', compact('mat_types', 'licenses', 'record', 'protect_evg_fields'));
     }
 
     /**

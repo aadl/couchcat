@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit a Record')
+@section('title', 'Edit '.$record->title)
 
 @section('content')
 @if (count($errors) > 0)
@@ -25,28 +25,28 @@
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-6">
-        {{ Form::text('title', $record->title, ['id' => 'title', 'class' => 'form-control', 'aria-describedby' => 'titleHelp', 'required' => true]) }}
+        {{ Form::text('title', $record->title, ['id' => 'title', 'class' => 'form-control', 'aria-describedby' => 'titleHelp', 'required' => true, $protect_evg_fields ]) }}
         <small id="titleHelp" class="form-text text-muted">Title of the record.</small>
     </div>
 </div>
 <div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
     <label for="title" class="col-sm-2 col-form-label">Author</label>
     <div class="col-sm-6">
-        {{ Form::text('author', ($record->author ?? ''), ['id' => 'author', 'class' => 'form-control', 'aria-describedby' => 'authorHelp']) }}
+        {{ Form::text('author', ($record->author ?? ''), ['id' => 'author', 'class' => 'form-control', 'aria-describedby' => 'authorHelp', $protect_evg_fields]) }}
         <small id="authorHelp" class="form-text text-muted">Author.</small>
     </div>
 </div>
 <div class="form-group row @if ($record->mat_code != 'z' && $record->mat_code != 'za')no-display @endif">
     <label for="title" class="col-sm-2 col-form-label">Artist</label>
     <div class="col-sm-6">
-        {{ Form::text('artist', ($record->artist ?? ''), ['id' => 'artist', 'class' => 'form-control', 'aria-describedby' => 'artistHelp']) }}
+        {{ Form::text('artist', ($record->artist ?? ''), ['id' => 'artist', 'class' => 'form-control', 'aria-describedby' => 'artistHelp', $protect_evg_fields]) }}
         <small id="artistHelp" class="form-text text-muted">Artist.</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="notes" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
-        {{ Form::textarea('notes', (isset($record->notes) ? implode("\n\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
+        {{ Form::textarea('notes', (isset($record->notes) ? implode("\n\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp', $protect_evg_fields]) }}
         <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
@@ -62,14 +62,14 @@
 <div class="form-group row">
     <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
     <div class="col-sm-6">
-        {{ Form::select('mat_code', $mat_types, $record->mat_code, ['id' => 'mat_code', 'class' => 'form-control', 'aria-describedby' => 'materialHelp']) }}
+        {{ Form::select('mat_code', $mat_types, $record->mat_code, ['id' => 'mat_code', 'class' => 'form-control', 'aria-describedby' => 'materialHelp', $protect_evg_fields]) }}
         <small id="materialHelp" class="form-text text-muted">Select the material type for this record.</small>
     </div>
 </div>
 <div class="form-group row">
     <label for="pub_year" class="col-sm-2 col-form-label">Pub Year</label>
     <div class="col-sm-6">
-        {{ Form::number('pub_year', ($record->pub_year ?? ''), ['id' => 'pub_year', 'class' => 'form-control', 'aria-describedby' => 'pubYearHelp']) }}
+        {{ Form::number('pub_year', ($record->pub_year ?? ''), ['id' => 'pub_year', 'class' => 'form-control', 'aria-describedby' => 'pubYearHelp', $protect_evg_fields]) }}
         <small id="pubYearHelp" class="form-text text-muted">Year this material was published.</small>
     </div>
 </div>
@@ -115,7 +115,7 @@
 <div class="form-group row">
     <label for="is_active" class="col-sm-2 col-form-label">Record Active</label>
     <div class="col-sm-6">
-        {{ Form::checkbox('is_active', null, $record->active, ['id' => 'is_active', 'aria-describedby' => 'publicHelp']) }}
+        {{ Form::checkbox('is_active', null, $record->active, ['id' => 'is_active', 'aria-describedby' => 'publicHelp', $protect_evg_fields]) }}
         <small id="publicHelp" class="form-text text-muted">Uncheck if this should suppressed in the public catalog.</small>
     </div>
 </div>
