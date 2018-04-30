@@ -156,6 +156,8 @@ class RecordController extends Controller
         if (isset($input['track-file'])) {
             $this->process_form_file_uploads($input['track-file'], $record->_id, $input['mat_code'], $record->licensed_from);
         }
+
+        return $record;
     }
 
     /**
@@ -189,8 +191,8 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-        $this->process_record(NULL, $request);
-        return redirect('record/' . $id . '/edit');
+        $record = $this->process_record(NULL, $request);
+        return redirect('record/' . $record->_id . '/edit');
     }
 
     /**
