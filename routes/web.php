@@ -20,4 +20,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('record', 'RecordController');
 });
 
+Route::match(['GET', 'POST'], 'cover/{id}/update', [ 'as' => 'record.cover', 'uses' => 'RecordController@updateCover']);
 Route::get('harvest/cover', 'HarvestController@cacheCover');
