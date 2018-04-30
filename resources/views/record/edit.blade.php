@@ -88,7 +88,7 @@
                 <div class="row form-group">
                     <label for="edit-track-title-{{ $num }}" class="col-sm-2 col-form-label">Track {{ $num }} Title</label>
                     <div class="col-sm-6">
-                        {{ Form::text('edit-track-title[]', $track->title, ['id' => 'edit-track-title-' . $num, 'class' => 'form-control', 'aria-describedby' => 'trackTitleHelp']) }}
+                        {{ Form::text('edit-track-title[' . $num . ']', $track->title, ['id' => 'edit-track-title-' . $num, 'class' => 'form-control', 'aria-describedby' => 'trackTitleHelp']) }}
                         <small id="trackTitleHelp" class="form-text text-muted">Title of the track.</small>
                     </div>
                 </div>

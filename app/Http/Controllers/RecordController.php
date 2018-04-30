@@ -138,6 +138,13 @@ class RecordController extends Controller
             }
         }
 
+        // update track titles
+        if (isset($input['edit-track-title'])) {
+            foreach ($input['edit-track-title'] as $num => $track_title) {
+                $record->tracks->$num->title = trim($track_title);
+            }
+        }
+
         try {
             $this->couch->storeDoc($record);
             $request->session()->flash('status', 'Record saved successfully!');
