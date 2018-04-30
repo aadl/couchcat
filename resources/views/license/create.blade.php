@@ -3,15 +3,6 @@
 @section('title', 'Add a License')
 
 @section('content')
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 {{ Form::open(array('route' => 'license.store')) }}
 <div class="form-group row">
     <label for="vendor_id" class="col-sm-2 col-form-label">Vendor Name</label>

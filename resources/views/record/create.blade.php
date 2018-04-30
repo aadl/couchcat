@@ -3,15 +3,6 @@
 @section('title', 'Add a Record')
 
 @section('content')
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 {{ Form::open(array('route' => 'record.store', 'files' => true)) }}
 <div class="form-group row">
     <label for="license_slug" class="col-sm-2 col-form-label">License Name</label>

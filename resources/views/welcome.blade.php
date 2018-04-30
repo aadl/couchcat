@@ -3,7 +3,6 @@
 @section('title', 'AADL Cataloging')
 
 @section('content')
-
 <h3>Couchcat Changes</h3>
 <ul>
     <li><a href="/vendor">Vendor</a> entry is done</li>

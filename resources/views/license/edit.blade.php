@@ -3,15 +3,6 @@
 @section('title', 'Edit License | '. $license->license_slug)
 
 @section('content')
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 {{ Form::model($license, ['route' => ['license.update', $license->id], 'method' => 'PATCH']) }}
 <div class="form-group row">
     <label for="vendor_id" class="col-sm-2 col-form-label">Vendor Name</label>

@@ -3,7 +3,6 @@
 @section('title', 'Vendor | ' . $vendor->name)
 
 @section('content')
-
 <h1>{{ $vendor->name }} <a href="{{ route('vendor.edit',['id' => $vendor['id']]) }}" class="btn btn-outline-primary float-right">Edit Vendor</a></h1>
 <div class="card">
     <h4 class="card-header">Contact Information</h4>

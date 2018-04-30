@@ -3,15 +3,6 @@
 @section('title', 'Vendor')
 
 @section('content')
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 {{ Form::model($vendor, ['route' => ['vendor.update', $vendor->id], 'method' => 'PATCH']) }}
 <div class="form-group row">
     {{ Form::label('name', 'Vendor Name', ['class' => 'col-sm-2 col-form-label']) }}

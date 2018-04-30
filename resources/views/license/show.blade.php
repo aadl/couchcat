@@ -3,7 +3,6 @@
 @section('title', 'License | ' . $license->statistics_stub)
 
 @section('content')
-
 <h1>{{ $license->license_slug }} <a href="{{ route('license.edit',['id' => $license->id]) }}" class="btn btn-outline-primary float-right">Edit License</a></h1>
 <div class="card">
     <h4 class="card-header">Vendor Information</h4>
