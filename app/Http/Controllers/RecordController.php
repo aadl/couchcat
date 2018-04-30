@@ -239,4 +239,21 @@ class RecordController extends Controller
     {
         //
     }
+
+    public function updateCover(Request $request, $id) 
+    {
+        $record = $this->couch->getDoc($id);
+        $title = $record->title;
+        $input = $request->all();
+        if (isset($input['cover'])) {
+            try {
+                $this->process_form_file_uploads($input['cover'], $id, 'cover');
+                $request->session()->flash('status', 'Cover updated successfully!');
+            } catch (Exception $e) {
+                $this->error("Updating cover failed : " . $e->getMessage());
+            }
+        }
+
+        return view('record.cover', compact('id', 'title'));
+    }
 }
