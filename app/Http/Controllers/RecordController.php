@@ -64,8 +64,7 @@ class RecordController extends Controller
     private function process_record($id = NULL, $request) 
     {
         $this->validate($request, [
-            'cover' => 'sometimes|nullable|mimes:jpg,jpeg',
-            'title' => 'required'
+            'cover' => 'sometimes|nullable|mimes:jpg,jpeg'
         ]);
 
         $input = $request->all();
@@ -79,7 +78,9 @@ class RecordController extends Controller
         }
 
         $record->bib_lastupdate = date('Y-m-d');
-        $record->title = $input['title'];
+        if (isset($input['title'])) {
+            $record->title = $input['title'];
+        }
         if (isset($input['author'])) {
             $record->author = $input['author'];
         }
@@ -87,10 +88,14 @@ class RecordController extends Controller
             $record->artist = $input['artist'];
         }
         if (isset($input['license_slug'])) {
-           $record->licensed_from = $input['license_slug']; 
+            $record->licensed_from = $input['license_slug']; 
         }
-        $record->mat_code = $input['mat_code'];
-        $record->pub_year = $input['pub_year'];
+        if (isset($input['mat_code'])) {
+            $record->mat_code = $input['mat_code'];
+        }
+        if (isset($input['pub_year'])) {
+            $record->pub_year = $input['pub_year']; 
+        }
         if (isset($input['notes'])) {
            $record->notes = explode("\n\n", $input['notes']); 
         }
