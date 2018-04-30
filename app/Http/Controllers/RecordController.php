@@ -147,7 +147,7 @@ class RecordController extends Controller
 
         try {
             $this->couch->storeDoc($record);
-            $request->session()->flash('status', 'Record saved successfully!');
+            $request->session()->flash('status', 'Record saved successfully! View it <a href="https://aadl.org/catalog/record/' . $record->_id . '" target="_blank">here</a>.');
         } catch (Exception $e) {
             $this->error("Saving record failed : " . $e->getMessage());
         }

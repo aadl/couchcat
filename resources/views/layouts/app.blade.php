@@ -37,7 +37,7 @@
             @if (Session::has('status'))
                 <div class="alert alert-success">
                     <ul>
-                        <li>{{ session('status') }}</li>
+                        <li>{!! session('status') !!}</li>
                     </ul>
                 </div>
             @endif
