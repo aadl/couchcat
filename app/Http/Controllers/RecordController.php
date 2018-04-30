@@ -140,6 +140,7 @@ class RecordController extends Controller
 
         try {
             $this->couch->storeDoc($record);
+            $request->session()->flash('status', 'Record saved successfully!');
         } catch (Exception $e) {
             $this->error("Saving record failed : " . $e->getMessage());
         }
@@ -182,7 +183,7 @@ class RecordController extends Controller
     public function store(Request $request)
     {
         $this->process_record(NULL, $request);
-        // return redirect('record/' . $id);
+        return redirect('record/' . $id . '/edit');
     }
 
     /**
@@ -225,7 +226,7 @@ class RecordController extends Controller
     public function update(Request $request, $id)
     {
         $this->process_record($id, $request);
-        // return redirect('record/' . $id);
+        return redirect('record/' . $id . '/edit');
     }
 
     /**
