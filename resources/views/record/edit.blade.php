@@ -37,7 +37,7 @@
 <div class="form-group row">
     <label for="notes" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
-        {{ Form::textarea('notes', (isset($record->notes) ? implode("\n\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp', $protect_evg_fields]) }}
+        {{ Form::textarea('notes', (isset($record->notes) ? implode("\r\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp', $protect_evg_fields]) }}
         <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
@@ -45,7 +45,7 @@
 <div class="form-group row">
     <label for="documentation" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
-        {{ Form::textarea('documentation', implode("\n\n", $record->documentation), ['id' => 'documentation', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
+        {{ Form::textarea('documentation', implode("\r\n", $record->documentation), ['id' => 'documentation', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
         <small id="documentationHelp" class="form-text text-muted">Links to useful documentation for the record.</small>
     </div>
 </div>

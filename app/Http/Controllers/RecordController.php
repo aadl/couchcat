@@ -64,7 +64,8 @@ class RecordController extends Controller
     private function process_record($id = NULL, $request) 
     {
         $this->validate($request, [
-            'cover' => 'sometimes|nullable|mimes:jpg,jpeg'
+            'cover' => 'sometimes|nullable|mimes:jpg,jpeg',
+            'title' => 'required'
         ]);
 
         $input = $request->all();
@@ -97,11 +98,11 @@ class RecordController extends Controller
             $record->pub_year = $input['pub_year']; 
         }
         if (isset($input['notes'])) {
-           $record->notes = explode("\n\n", $input['notes']); 
+           $record->notes = explode("\r\n", $input['notes']); 
         }
         $record->active = (isset($input['is_active']) ? 1 : 0);
         if (isset($input['documentation'])) {
-            $record->documentation = explode("\n\n", $input['notes']);
+            $record->documentation = explode("\r\n", $input['notes']);
         }
 
         // grab and upload the cover image if provided
@@ -114,9 +115,9 @@ class RecordController extends Controller
         if (isset($input['attachment'])) {
             if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
                 $allowed = 'pdf';
-                $this->validate($request, [
-                    'attachment' => 'required|mimes:' . $allowed
-                ]);
+                // $this->validate($request, [
+                //     'attachment' => 'required|mimes:' . $allowed
+                // ]);
                 $this->process_form_file_uploads($input['attachment'], $record->_id, $input['mat_code'], $record->licensed_from);
             }
         }
