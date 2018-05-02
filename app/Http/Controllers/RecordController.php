@@ -44,6 +44,14 @@ class RecordController extends Controller
             $files->storeAs('/', $id . $save_as);
             $file_handler->uploadFile('app/' . $id . $save_as, 'licensed', $path);
         }
+
+        // process and upload vid files
+        if ($mat_code == 'zm') {
+            $sve_as = '.mp4';
+            $path = $license_paths[$mat_code] . '/' . $licensed_from . '/';
+            $files->storeAs('/', $id . $save_as);
+            $file_handler->uploadFile('app/' . $id . $save_as, 'licensed', $path);
+        }
         
         // process and upload audio files
         if ($mat_code == 'z' || $mat_code == 'za') {
@@ -115,11 +123,13 @@ class RecordController extends Controller
         if (isset($input['attachment'])) {
             if ($input['mat_code'] == 'zb' || $input['mat_code'] == 'zp') {
                 $allowed = 'pdf';
-                // $this->validate($request, [
-                //     'attachment' => 'required|mimes:' . $allowed
-                // ]);
-                $this->process_form_file_uploads($input['attachment'], $record->_id, $input['mat_code'], $record->licensed_from);
+            } elseif ($input['mat_code'] == 'zm') {
+                $allowed = 'mp4,mov';
             }
+            // $this->validate($request, [
+            //     'attachment' => 'required|mimes:' . $allowed
+            // ]);
+            $this->process_form_file_uploads($input['attachment'], $record->_id, $input['mat_code'], $record->licensed_from);
         }
 
         if (isset($input['track-file'])) {
