@@ -51,7 +51,8 @@ class Mp3Tracks extends Command
             $parsepath = pathinfo($file);
             if ($parsepath['extension'] == 'mp3') {
                 $audio = $this->ffmpeg->format(storage_path('app/'.$file));
-                $track_num = (int) substr($parsepath['filename'], 0, 2);
+                $track_num = substr($parsepath['filename'], 0, 3);
+                $track_num = (int) preg_replace('/\D/', '', $track_num);
                 if (isset($doc->tracks->$track_num)) {
                     $doc->tracks->$track_num->filename = $parsepath['filename'] . '.mp3';
                     $doc->tracks->$track_num->size = (int) round($audio->get('size'));

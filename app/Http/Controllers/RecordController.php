@@ -129,7 +129,9 @@ class RecordController extends Controller
             // ]);
             foreach ($input['track-file'] as $track) {
                 $track_title = explode('.', $track->getClientOriginalName())[0];
-                $track_num = (int) substr($track_title, 0, 2);
+                $track_title = str_replace('_', '', $track_title);
+                $track_num = substr($track_title, 0, 3);
+                $track_num = (int) preg_replace('/\D/', '', $track_num);
                 $track_title = trim(substr($track_title, 2));
                 if (!isset($record->tracks)) {
                     $record->tracks = new \stdClass;
