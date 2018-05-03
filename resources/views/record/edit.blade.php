@@ -14,6 +14,13 @@
 </div>
 @endif
 <div class="form-group row">
+    <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
+    <div class="col-sm-6">
+        {{ Form::select('mat_code', $mat_types, $record->mat_code, ['id' => 'mat_code', 'class' => 'form-control', 'aria-describedby' => 'materialHelp', $protect_evg_fields]) }}
+        <small id="materialHelp" class="form-text text-muted">Select the material type for this record.</small>
+    </div>
+</div>
+<div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-6">
         {{ Form::text('title', $record->title, ['id' => 'title', 'class' => 'form-control', 'aria-describedby' => 'titleHelp', 'required' => true, $protect_evg_fields ]) }}
@@ -50,13 +57,6 @@
     </div>
 </div>
 @endif
-<div class="form-group row">
-    <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
-    <div class="col-sm-6">
-        {{ Form::select('mat_code', $mat_types, $record->mat_code, ['id' => 'mat_code', 'class' => 'form-control', 'aria-describedby' => 'materialHelp', $protect_evg_fields]) }}
-        <small id="materialHelp" class="form-text text-muted">Select the material type for this record.</small>
-    </div>
-</div>
 <div class="form-group row">
     <label for="pub_year" class="col-sm-2 col-form-label">Pub Year</label>
     <div class="col-sm-6">

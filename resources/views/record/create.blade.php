@@ -12,6 +12,13 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
+    <div class="col-sm-6">
+        {{ Form::select('mat_code', $mat_types, null, ['id' => 'mat_code', 'class' => 'form-control', 'aria-describedby' => 'materialHelp']) }}
+        <small id="materialHelp" class="form-text text-muted">Select the material type for this record.</small>
+    </div>
+</div>
+<div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-6">
         {{ Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'aria-describedby' => 'titleHelp']) }}
@@ -37,13 +44,6 @@
     <div class="col-sm-6">
         {{ Form::textarea('notes', null, ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
         <small id="titleHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
-    </div>
-</div>
-<div class="form-group row">
-    <label for="mat_type" class="col-sm-2 col-form-label">Material Type</label>
-    <div class="col-sm-6">
-        {{ Form::select('mat_code', $mat_types, null, ['id' => 'mat_code', 'class' => 'form-control', 'aria-describedby' => 'materialHelp']) }}
-        <small id="materialHelp" class="form-text text-muted">Select the material type for this record.</small>
     </div>
 </div>
 <div class="form-group row">
