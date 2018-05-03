@@ -12,7 +12,7 @@ class Flac
     {
         $this->doc = $doc;
         $this->couchid = $doc->_id;
-        $this->ffmpeg = FFMpeg\FFMpeg::create();
+        $this->ffmpeg = FFMpeg\FFMpeg::create(['ffmpeg.binaries' => config('paths.ffmpeg'), 'ffprobe.binaries' => config('paths.ffprobe')]);
     }
     /**
      * Rename the flac files to be URL friendly

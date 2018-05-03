@@ -34,7 +34,7 @@ class Mp3Tracks extends Command
         parent::__construct();
 
         $this->couch = resolve('Couchdb');
-        $this->ffmpeg = FFMpeg\FFProbe::create(['ffprobe.binaries' => '/usr/bin/ffprobe']);
+        $this->ffmpeg = FFMpeg\FFProbe::create(['ffmpeg.binaries' => config('paths.ffmpeg'), 'ffprobe.binaries' => config('paths.ffprobe')]);
     }
 
     /**
