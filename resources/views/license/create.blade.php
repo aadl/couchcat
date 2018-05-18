@@ -51,7 +51,7 @@
     <label for="patrons_only" class="col-sm-2 col-form-label">Patrons Only</label>
     <div class="col-sm-6">
         <input type="checkbox" class="form-control" name="patrons_only" aria-describedby="publicHelp" checked>
-        <small id="publicHelp" class="form-text text-muted">Check if this should be public access (no Lcard required).</small>
+        <small id="publicHelp" class="form-text text-muted">Uncheck if this should be public access (no Lcard required).</small>
     </div>
 </div>
 <button type="submit" class="btn btn-primary mb-2">Add License</button>
