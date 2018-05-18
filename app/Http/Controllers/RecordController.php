@@ -47,7 +47,7 @@ class RecordController extends Controller
 
         // process and upload vid files
         if ($mat_code == 'zm') {
-            $sve_as = '.mp4';
+            $save_as = '.mp4';
             $path = $license_paths[$mat_code] . '/' . $licensed_from . '/';
             $files->storeAs('/', $id . $save_as);
             $file_handler->uploadFile('app/' . $id . $save_as, 'licensed', $path);
