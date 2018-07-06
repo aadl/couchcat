@@ -103,6 +103,24 @@
     </div>
 </div>
 @endif
+@if (isset($record->gamecodes))
+    <div>
+        <fieldset>
+            <legend>Game Codes</legend>
+            @foreach ($record->gamecodes as $k => $codes)
+                @foreach ($codes as $num => $code)
+                <div class="row form-group">
+                    <label for="edit-gamecode-{{ $k }}-{{ $num }}" class="col-sm-2 col-form-label">{{ $k }}</label>
+                    <div class="col-sm-6">
+                        {{ Form::text('edit-gamecode[' . $k . '-' . $num . ']', $code, ['id' => 'edit-gamecode-' . $k . '-' . $num, 'class' => 'form-control', 'aria-describedby' => 'gameCodeHelp']) }}
+                        <small id="gameCodeHelp" class="form-text text-muted">Game code text.</small>
+                    </div>
+                </div>
+                @endforeach
+            @endforeach
+        </fieldset>
+    </div>
+@endif
 <div class="form-group row">
     <label for="is_active" class="col-sm-2 col-form-label">Record Active</label>
     <div class="col-sm-6">

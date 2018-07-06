@@ -158,6 +158,16 @@ class RecordController extends Controller
             }
         }
 
+        // update game codes
+        if (isset($input['edit-gamecode'])) {
+            foreach($input['edit-gamecode'] as $k => $code) {
+                $split_code = explode('-', $k);
+                $game_term = $split_code[0];
+                $code_num = $split_code[1];
+                $record->gamecodes->$game_term[$code_num] = $code;
+            }
+        }
+
         try {
             $this->couch->storeDoc($record);
             $request->session()->flash('status', 'Record saved successfully! View it <a href="https://aadl.org/catalog/record/' . $record->_id . '" target="_blank">here</a>.');
