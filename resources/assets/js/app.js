@@ -74,4 +74,9 @@ $(function() {
         return false;
     });
 
+    $('.delete-game-code').click(function() {
+        $(this).parents('.form-group').remove();
+        return false;
+    });
+
 });

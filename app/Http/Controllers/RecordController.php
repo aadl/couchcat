@@ -159,6 +159,20 @@ class RecordController extends Controller
             }
         }
 
+        // update game codes
+        if (isset($input['edit-gamecode'])) {
+            unset($record->gamecodes);
+            $record->gamecodes = new \stdClass;
+            foreach ($input['edit-gamecode'] as $game_term => $codes) {
+                $record->gamecodes->$game_term = [];
+                foreach ($codes as $code) {
+                    $record->gamecodes->$game_term[] = $code;
+                }
+            }
+        } elseif (isset($record->gamecodes)) {
+            unset($record->gamecodes);
+        }
+
         try {
             $this->couch->storeDoc($record);
             $request->session()->flash('status', 'Record saved successfully! View it <a href="https://aadl.org/catalog/record/' . $record->_id . '" target="_blank">here</a>.');
