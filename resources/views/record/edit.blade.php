@@ -112,8 +112,9 @@
                 <div class="row form-group">
                     <label for="edit-gamecode-{{ $k }}-{{ $num }}" class="col-sm-2 col-form-label">{{ $k }}</label>
                     <div class="col-sm-6">
-                        {{ Form::text('edit-gamecode[' . $k . '-' . $num . ']', $code, ['id' => 'edit-gamecode-' . $k . '-' . $num, 'class' => 'form-control', 'aria-describedby' => 'gameCodeHelp']) }}
+                        {{ Form::text("edit-gamecode[$k][]", $code, ['id' => 'edit-gamecode-' . $k . '-' . $num, 'class' => 'form-control', 'aria-describedby' => 'gameCodeHelp']) }}
                         <small id="gameCodeHelp" class="form-text text-muted">Game code text.</small>
+                        <button class="btn btn-danger delete-game-code">Delete {{ $code }}</button>
                     </div>
                 </div>
                 @endforeach
