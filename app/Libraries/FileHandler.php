@@ -17,7 +17,7 @@ class FileHandler
     {
         $cover_file = storage_path($record_id . '.jpg');
         $guzzle = new Client(['base_uri' => $url]);
-        $response = $guzzle->request('GET', null, ['sink' => $cover_file]);
+        $response = $guzzle->request('GET', null, ['sink' => $cover_file, 'timeout' => 300]);
     }
 
     public function uploadFile($file, $bucket, $path = NULL)

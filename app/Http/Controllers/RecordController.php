@@ -27,6 +27,7 @@ class RecordController extends Controller
 
     private function process_form_file_uploads($files, $id, $mat_code = '', $licensed_from = '') 
     {
+        set_time_limit(0);
         $file_handler = new FileHandler;
         $license_paths = config('license_paths');
 
