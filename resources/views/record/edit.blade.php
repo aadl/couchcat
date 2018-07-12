@@ -129,6 +129,13 @@
         <small id="publicHelp" class="form-text text-muted">Uncheck if this should suppressed in the public catalog.</small>
     </div>
 </div>
+<div class="form-group row">
+    <label for="is_protected" class="col-sm-2 col-form-label">Record Protected</label>
+    <div class="col-sm-6">
+        {{ Form::checkbox('is_protected', null, $record->flags->protected, ['id' => 'is_protected', 'aria-describedby' => 'protectedHelp', $protect_evg_fields]) }}
+        <small id="protectedHelp" class="form-text text-muted">Check if this record should be protected from suppression.</small>
+    </div>
+</div>
 <button type="submit" class="btn btn-primary mb-2">Edit Record</button>
 {{ Form::close() }}
 @endsection

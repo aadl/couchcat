@@ -110,6 +110,8 @@ class RecordController extends Controller
            $record->notes = explode("\r\n", $input['notes']); 
         }
         $record->active = (isset($input['is_active']) ? 1 : 0);
+        $record->flags = $record->flags ?? new \stdClass;
+        $record->flags->protected = (isset($input['is_protected']) ? 1 : 0);
         if (isset($input['documentation'])) {
             $record->documentation = explode("\r\n", $input['notes']);
         }
