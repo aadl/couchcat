@@ -132,7 +132,7 @@
 <div class="form-group row">
     <label for="is_protected" class="col-sm-2 col-form-label">Record Protected</label>
     <div class="col-sm-6">
-        {{ Form::checkbox('is_protected', null, $record->flags->protected, ['id' => 'is_protected', 'aria-describedby' => 'protectedHelp', $protect_evg_fields]) }}
+        {{ Form::checkbox('is_protected', null, $record->flags->protected ?? 0, ['id' => 'is_protected', 'aria-describedby' => 'protectedHelp', $protect_evg_fields]) }}
         <small id="protectedHelp" class="form-text text-muted">Check if this record should be protected from suppression.</small>
     </div>
 </div>
