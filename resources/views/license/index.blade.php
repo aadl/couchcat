@@ -18,8 +18,9 @@
 	</thead>
 	<tbody>
 	@foreach($licenses as $license)
+	@if (is_object($license))
 		<tr>
-			<td><a href="{{ route('vendor.show',['id' => $license->vendor->id]) }}">{{ $license->vendor->name }}</a></td>
+			<td><a href="{{ route('vendor.show',['id' => ($license->vendor->id ?? '')]) }}">{{ $license->vendor->name ?? '' }}</a></td>
 			<td>{{ $license->license_slug }}</td>
 			<td>{{ $license->starts }}</td>
 			<td class='{{ $license->expired ? 'text-danger' : 'text-success' }}'>{{ $license->expires ?? 'indefinite' }}</td>
@@ -30,6 +31,7 @@
 				<a href="{{ route('record.create', ['license_slug' => $license->license_slug]) }}">Add Record</a>
 			</td>
 		</tr>
+	@endif
 	@endforeach
 	</tbody>
 </table>
