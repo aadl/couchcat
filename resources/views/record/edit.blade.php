@@ -50,7 +50,7 @@
 </div>
 @if (isset($record->documentation))
 <div class="form-group row">
-    <label for="documentation" class="col-sm-2 col-form-label">Summary / Description</label>
+    <label for="documentation" class="col-sm-2 col-form-label">Documentation</label>
     <div class="col-sm-6">
         {{ Form::textarea('documentation', implode("\r\n", $record->documentation), ['id' => 'documentation', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
         <small id="documentationHelp" class="form-text text-muted">Links to useful documentation for the record.</small>
