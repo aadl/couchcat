@@ -14,7 +14,7 @@ class License extends Model
 
     public function vendor()
     {
-        return $this->belongsTo('App\Vendor');
+        return $this->belongsTo(\App\Vendor::class);
     }
 
     public function getExpiredAttribute()
