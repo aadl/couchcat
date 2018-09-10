@@ -50,7 +50,7 @@ class Mp3
         $zip = Zip::create($zip_filename);
         $zip->setSkipped('HIDDEN');
         $files = Storage::allFiles('music/'.$this->couchid.'/derivatives/tracks/');
-        $to_add = array();
+        $to_add = [];
         foreach ($files as $file) {
             $parsepath = pathinfo($file);
             if ($parsepath['extension'] == 'mp3') {
