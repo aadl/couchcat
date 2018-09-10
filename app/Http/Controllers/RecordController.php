@@ -18,14 +18,14 @@ class RecordController extends Controller
     {
         $this->couch = resolve('Couchdb');
         $this->mat_types = config('mat_types');
-        $licenses = License::all()->mapWithKeys(function($license) {
+        $licenses = License::all()->mapWithKeys(function ($license) {
             return [$license['license_slug'] => $license['license_slug']];
         })->all();
         // give blank option empty key so it won't be counted as set if no license selected
         $this->licenses = array_merge(['' => ''], $licenses);
     }
 
-    private function process_form_file_uploads($files, $id, $mat_code = '', $licensed_from = '') 
+    private function process_form_file_uploads($files, $id, $mat_code = '', $licensed_from = '')
     {
         set_time_limit(0);
         $file_handler = new FileHandler;
@@ -70,7 +70,7 @@ class RecordController extends Controller
         }
     }
 
-    private function process_record($id = NULL, $request) 
+    private function process_record($id = null, $request)
     {
         $this->validate($request, [
             'cover' => 'sometimes|nullable|mimes:jpg,jpeg',
@@ -98,16 +98,16 @@ class RecordController extends Controller
             $record->artist = $input['artist'];
         }
         if (isset($input['license_slug'])) {
-            $record->licensed_from = $input['license_slug']; 
+            $record->licensed_from = $input['license_slug'];
         }
         if (isset($input['mat_code'])) {
             $record->mat_code = $input['mat_code'];
         }
         if (isset($input['pub_year'])) {
-            $record->pub_year = $input['pub_year']; 
+            $record->pub_year = $input['pub_year'];
         }
         if (isset($input['notes'])) {
-           $record->notes = explode("\r\n", $input['notes']); 
+            $record->notes = explode("\r\n", $input['notes']);
         }
         $record->active = (isset($input['is_active']) ? 1 : 0);
         $record->flags = $record->flags ?? new \stdClass;
@@ -221,7 +221,7 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-        $record = $this->process_record(NULL, $request);
+        $record = $this->process_record(null, $request);
         return redirect('record/' . $record->_id . '/edit');
     }
 
@@ -279,7 +279,7 @@ class RecordController extends Controller
         //
     }
 
-    public function updateCover(Request $request, $id) 
+    public function updateCover(Request $request, $id)
     {
         $record = $this->couch->getDoc($id);
         $title = $record->title;

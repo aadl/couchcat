@@ -20,7 +20,7 @@ class FileHandler
         $response = $guzzle->request('GET', null, ['sink' => $cover_file, 'timeout' => 300]);
     }
 
-    public function uploadFile($file, $bucket, $path = NULL)
+    public function uploadFile($file, $bucket, $path = null)
     {
         $s3 = AWS::createClient('s3');
         $split = explode('/', $file);

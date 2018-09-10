@@ -56,7 +56,5 @@ class RecordSuppress extends Command
         } catch (Exception $e) {
             $this->error("Getting record failed : " . $e->getMessage());
         }
-
-
     }
 }

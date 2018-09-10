@@ -51,9 +51,9 @@ class Mp3
         $zip->setSkipped('HIDDEN');
         $files = Storage::allFiles('music/'.$this->couchid.'/derivatives/tracks/');
         $to_add = array();
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $parsepath = pathinfo($file);
-            if($parsepath['extension'] == 'mp3') {
+            if ($parsepath['extension'] == 'mp3') {
                 $to_add[] = storage_path('app/'.$file);
             }
         }

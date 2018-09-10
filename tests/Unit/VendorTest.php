@@ -26,7 +26,7 @@ class VendorTest extends TestCase
     {
         $vendor = factory(Vendor::class)->create();
         
-        $licenses = factory(License::class,10)->create(['vendor_id' => $vendor->id]);
+        $licenses = factory(License::class, 10)->create(['vendor_id' => $vendor->id]);
 
         $this->assertCount(10, $vendor->licenses);
     }
