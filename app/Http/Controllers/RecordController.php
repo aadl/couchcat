@@ -113,7 +113,7 @@ class RecordController extends Controller
         $record->flags = $record->flags ?? new \stdClass;
         $record->flags->protected = (isset($input['is_protected']) ? 1 : 0);
         if (isset($input['documentation'])) {
-            $record->documentation = explode("\r\n", $input['notes']);
+            $record->documentation = explode("\r\n", $input['documentation']);
         }
 
         // grab and upload the cover image if provided
