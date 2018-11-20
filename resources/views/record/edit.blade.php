@@ -136,6 +136,13 @@
         <small id="protectedHelp" class="form-text text-muted">Check if this record should be protected from suppression.</small>
     </div>
 </div>
+<div class="form-group row">
+    <label for="is_protected" class="col-sm-2 col-form-label">Not Requestable</label>
+    <div class="col-sm-6">
+        {{ Form::checkbox('not_requestable', null, $record->disable_requests ?? 0, ['id' => 'not_requestable', 'aria-describedby' => 'requestableHelp']) }}
+        <small id="requestableHelp" class="form-text text-muted">Check if this record shouldn't be requestable.</small>
+    </div>
+</div>
 <button type="submit" class="btn btn-primary mb-2">Edit Record</button>
 {{ Form::close() }}
 @endsection
