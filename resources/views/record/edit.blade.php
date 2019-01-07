@@ -143,6 +143,13 @@
         <small id="requestableHelp" class="form-text text-muted">Check if this record shouldn't be requestable.</small>
     </div>
 </div>
+<div class="form-group row">
+    <label for="is_public_domain" class="col-sm-2 col-form-label">Public Domain</label>
+    <div class="col-sm-6">
+        {{ Form::checkbox('is_public_domain', null, $record->flags->public_domain ?? 0, ['id' => 'is_public_domain', 'aria-describedby' => 'publicDomainHelp']) }}
+        <small id="publicDomainHelp" class="form-text text-muted">Check if this record should be in the public domain and available to anyone.</small>
+    </div>
+</div>
 <button type="submit" class="btn btn-primary mb-2">Edit Record</button>
 {{ Form::close() }}
 @endsection
