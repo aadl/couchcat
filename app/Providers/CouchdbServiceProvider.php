@@ -2,20 +2,13 @@
 
 namespace App\Providers;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use PHPOnCouch\Couch;
 use PHPOnCouch\CouchClient;
 use Illuminate\Support\ServiceProvider;
 
-class CouchdbServiceProvider extends ServiceProvider
+class CouchdbServiceProvider extends ServiceProvider  implements DeferrableProvider
 {
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
 
     /**
      * Register the application services.
