@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Artisan;
 use Cache;
 use Storage;
@@ -60,7 +61,7 @@ class RecordController extends Controller
             
             foreach ($files as $key => $track) {
                 $track_split = explode('.', $track->getClientOriginalName())[0];
-                $track_name = str_slug($track_split, '-') . '.mp3';
+                $track_name = Str::slug($track_split, '-') . '.mp3';
                 $track->storeAs("music/$id/derivatives/tracks", $track_name);
                 $file_handler->uploadFile("app/music/$id/derivatives/tracks/$track_name", 'licensed', $path . 'tracks/');
             }
@@ -81,7 +82,7 @@ class RecordController extends Controller
 
         if (!$id) {
             $record = new \stdClass;
-            $record->_id = str_slug($input['title'], '-');
+            $record->_id = Str::slug($input['title'], '-');
             $record->bib_created = date('Y-m-d');
         } else {
             $record = $this->couch->getDoc($id);
