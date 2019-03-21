@@ -2,6 +2,7 @@
 
 namespace App\Processors\Music;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Comodojo\Zip\Zip;
 use FFMpeg;
@@ -24,7 +25,7 @@ class Mp3
     {
         $parsepath = pathinfo($file);
         $filename = $parsepath['filename'];
-        $safe_filename = str_slug($filename, '-');
+        $safe_filename = Str::slug($filename, '-');
         if ($parsepath['extension'] !== 'mp3') {
             return false;
         }

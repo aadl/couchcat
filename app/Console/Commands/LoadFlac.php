@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,10 +43,10 @@ class LoadFlac extends Command
         $couch = resolve('Couchdb');
         
         $doc = new \stdClass();
-        $doc->_id = str_slug($directory, '-');
+        $doc->_id = Str::slug($directory, '-');
         $doc->qsrcode = substr($directory, 0, 7);
         
-        $withoutqsr = trim(str_after($directory, $doc->qsrcode), ' ()');
+        $withoutqsr = trim(Str::after($directory, $doc->qsrcode), ' ()');
         $artistalbum = explode(' - ', $withoutqsr);
         $doc->artist = $artistalbum[0];
         $doc->title = $artistalbum[1];
@@ -57,7 +58,7 @@ class LoadFlac extends Command
             $ffprobe = \FFMpeg\FFProbe::create();
             $parsepath = pathinfo($file);
             $filename = $parsepath['filename'];
-            if (!starts_with($filename, '.') && $parsepath['extension'] == 'flac') {
+            if (!Str::startsWith($filename, '.') && $parsepath['extension'] == 'flac') {
                 $length = $ffprobe->format(storage_path('app/'.$file))->get('duration');
                 $tracknum = (int)substr($filename, 0, 2);
                 $trackname = substr($filename, 3);

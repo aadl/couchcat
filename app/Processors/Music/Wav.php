@@ -2,6 +2,7 @@
 
 namespace App\Processors\Music;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use FFMpeg;
 
@@ -21,7 +22,7 @@ class Wav
     {
         $parsepath = pathinfo($file);
         $filename = $parsepath['filename'];
-        $safe_filename = str_slug($filename, '-');
+        $safe_filename = Str::slug($filename, '-');
         if ($parsepath['extension'] !== 'wav') {
             return false;
         }
