@@ -32,7 +32,7 @@
         "php-ffmpeg/binary-driver": "dev-master",
         "php-ffmpeg/php-ffmpeg": "^0.13",
         "php-on-couch/php-on-couch": "^2.0",
-        "pixelpeter/laravel5-isocodes-validation": "^2.0",
+        "pixelpeter/laravel5-isocodes-validation": "^3.0",
         "predis/predis": "^1.1",
         "spatie/laravel-backup": "^6.1"
     },
