@@ -118,10 +118,24 @@ class RecordController extends Controller
         if (isset($input['documentation'])) {
             $record->documentation = explode("\r\n", $input['documentation']);
         }
+        if (isset($input['contents'])) {
+            $record->contents = explode("\r\n", $input['contents']);
+        }
+        if (isset($input['related_links'])) {
+            $record->related_links = explode("\r\n", $input['related_links']);
+        }
 
         // grab and upload the cover image if provided
         if (isset($input['cover'])) {
             $this->process_form_file_uploads($input['cover'], $record->_id, 'cover');
+        }
+
+        // grab and upload catalog guide if attached
+        if (isset($input['cat_guide'])) {
+            // $this->process_form_file_uploads($input['cat_guide'], $record->_id, 'cover');
+            $filename = $input['cat_guide']->getClientOriginalName();
+            Storage::disk('catalog_guides')->put($filename, fopen($input['cat_guide'], 'r+'));
+            $record->documentation[] = "https://aadl.org/files/catalog_guides/$filename";
         }
 
         $license_paths = config('license_paths');

@@ -57,6 +57,22 @@
     </div>
 </div>
 @endif
+@if ($record->mat_code == 'r')
+<div class="form-group row">
+    <label for="contents" class="col-sm-2 col-form-label">Contents</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('contents', implode("\r\n", ($record->contents ?? [])), ['id' => 'contents', 'class' => 'form-control', 'aria-describedby' => 'contentsHelp']) }}
+        <small id="contentsHelp" class="form-text text-muted">All parts that come with the tool.</small>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="related_links" class="col-sm-2 col-form-label">Related Links</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('related_links', implode("\r\n", ($record->related_links ?? [])), ['id' => 'related_links', 'class' => 'form-control', 'aria-describedby' => 'relatedHelp']) }}
+        <small id="relatedHelp" class="form-text text-muted">Related items for this record. Format as Title|Link with each line being a related link.</small>
+    </div>
+</div>
+@endif
 <div class="form-group row">
     <label for="pub_year" class="col-sm-2 col-form-label">Pub Year</label>
     <div class="col-sm-6">
@@ -71,6 +87,15 @@
         <small id="coverHelp" class="form-text text-muted">Attach a new cover image.</small>
     </div>
 </div>
+@if ($record->mat_code == 'r')
+<div class="form-group row">
+    <label for="cat_guide" class="col-sm-2 col-form-label">Catalog Guide</label>
+    <div class="col-sm-6">
+        {{ Form::file('cat_guide', ['id' => 'cat_guide', 'class' => 'form-control', 'aria-describedby' => 'guideHelp']) }}
+        <small id="coverHelp" class="form-text text-muted">Upload a catalog guide.</small>
+    </div>
+</div>
+@endif
 @if (strpos($record->mat_code, 'z') !== false)
 <div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
     <label for="attachment" class="col-sm-2 col-form-label">Record File</label>
