@@ -71,6 +71,13 @@ return [
             'negatives_completed_tifs' => env('OLDNEWS_MOUNT') . env('NEGATIVES_TIF_COMPLETED'),
             'negatives_jpg_completed' => env('OLDNEWS_MOUNT') . env('NEGATIVES_JPG_COMPLETED'),
         ],
+        'catalog_guides' => [
+            'driver' => 'sftp',
+            'root' => env('SFTP_ROOT'),
+            'host' => env('SFTP_HOST'),
+            'username' => env('SFTP_USER'),
+            'password' => env('SFTP_PASS'),
+        ],
 
     ],
 
