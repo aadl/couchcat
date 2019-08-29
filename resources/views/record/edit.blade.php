@@ -48,11 +48,11 @@
         <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
-@if (isset($record->documentation))
+@if ($record->mat_code == 'r')
 <div class="form-group row">
     <label for="documentation" class="col-sm-2 col-form-label">Documentation</label>
     <div class="col-sm-6">
-        {{ Form::textarea('documentation', implode("\r\n", $record->documentation), ['id' => 'documentation', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
+        {{ Form::textarea('documentation', implode("\r\n", ($record->documentation ?? [])), ['id' => 'documentation', 'class' => 'form-control', 'aria-describedby' => 'documentationHelp']) }}
         <small id="documentationHelp" class="form-text text-muted">Links to useful documentation for the record.</small>
     </div>
 </div>

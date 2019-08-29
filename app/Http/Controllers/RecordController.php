@@ -117,6 +117,8 @@ class RecordController extends Controller
         $record->disable_requests = (isset($input['not_requestable']) ? 1 : 0);
         if (isset($input['documentation'])) {
             $record->documentation = explode("\r\n", $input['documentation']);
+        } else {
+	    unset($record->documentation);
         }
         if (isset($input['contents'])) {
             $record->contents = explode("\r\n", $input['contents']);
