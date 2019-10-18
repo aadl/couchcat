@@ -25,6 +25,7 @@ return [
         'z' => 'Music Download',
         'za' => 'Audiobook Download',
         'zb' => 'Book Download',
+        'zd' => 'Database',
         'zm' => 'Movie Download',
         'zp' => 'Pattern Download',
         'zy' => 'Website'
