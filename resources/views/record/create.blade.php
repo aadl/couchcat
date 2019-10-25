@@ -26,24 +26,31 @@
     </div>
 </div>
 <div class="form-group row no-display">
-    <label for="title" class="col-sm-2 col-form-label">Author</label>
+    <label for="author" class="col-sm-2 col-form-label">Author</label>
     <div class="col-sm-6">
         {{ Form::text('author', null, ['id' => 'author', 'class' => 'form-control', 'aria-describedby' => 'authorHelp']) }}
-        <small id="authorHelp" class="form-text text-muted">Author.</small>
+        <small id="authorHelp" class="form-text text-muted">Last name, first name.</small>
     </div>
 </div>
 <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label">Artist</label>
+    <label for="artist" class="col-sm-2 col-form-label">Artist</label>
     <div class="col-sm-6">
         {{ Form::text('artist', null, ['id' => 'artist', 'class' => 'form-control', 'aria-describedby' => 'artistHelp']) }}
         <small id="artistHelp" class="form-text text-muted">Artist.</small>
     </div>
 </div>
 <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label">Summary / Description</label>
+    <label for="notes" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
         {{ Form::textarea('notes', null, ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp']) }}
         <small id="titleHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="series" class="col-sm-2 col-form-label">Series</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('series', ($record->series ?? ''), ['id' => 'series', 'class' => 'form-control', 'aria-describedby' => 'seriesHelp']) }}
+        <small id="seriesHelp" class="form-text text-muted">Series. One per line.</small>
     </div>
 </div>
 <div class="form-group row">

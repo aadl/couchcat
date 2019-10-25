@@ -98,6 +98,11 @@ class RecordController extends Controller
         if (isset($input['artist'])) {
             $record->artist = $input['artist'];
         }
+        if (isset($input['series'])) {
+            $record->series = explode("\r\n", $input['series']);
+        } else {
+            unset($record->series);
+        }
         if (isset($input['license_slug'])) {
             $record->licensed_from = $input['license_slug'];
         }
@@ -118,7 +123,7 @@ class RecordController extends Controller
         if (isset($input['documentation'])) {
             $record->documentation = explode("\r\n", $input['documentation']);
         } else {
-	    unset($record->documentation);
+    	    unset($record->documentation);
         }
         if (isset($input['contents'])) {
             $record->contents = explode("\r\n", $input['contents']);

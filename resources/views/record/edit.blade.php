@@ -28,14 +28,14 @@
     </div>
 </div>
 <div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
-    <label for="title" class="col-sm-2 col-form-label">Author</label>
+    <label for="author" class="col-sm-2 col-form-label">Author</label>
     <div class="col-sm-6">
         {{ Form::text('author', ($record->author ?? ''), ['id' => 'author', 'class' => 'form-control', 'aria-describedby' => 'authorHelp', $protect_evg_fields]) }}
-        <small id="authorHelp" class="form-text text-muted">Author.</small>
+        <small id="authorHelp" class="form-text text-muted">Last name, first name.</small>
     </div>
 </div>
 <div class="form-group row @if ($record->mat_code != 'z' && $record->mat_code != 'za')no-display @endif">
-    <label for="title" class="col-sm-2 col-form-label">Artist</label>
+    <label for="artist" class="col-sm-2 col-form-label">Artist</label>
     <div class="col-sm-6">
         {{ Form::text('artist', ($record->artist ?? ''), ['id' => 'artist', 'class' => 'form-control', 'aria-describedby' => 'artistHelp', $protect_evg_fields]) }}
         <small id="artistHelp" class="form-text text-muted">Artist.</small>
@@ -46,6 +46,13 @@
     <div class="col-sm-6">
         {{ Form::textarea('notes', (isset($record->notes) ? implode("\r\n", $record->notes) : ''), ['id' => 'notes', 'class' => 'form-control', 'aria-describedby' => 'notesHelp', $protect_evg_fields]) }}
         <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
+    </div>
+</div>
+<div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
+    <label for="series" class="col-sm-2 col-form-label">Series</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('series', implode("\r\n", ($record->series ?? [])), ['id' => 'series', 'class' => 'form-control', 'aria-describedby' => 'seriesHelp', $protect_evg_fields]) }}
+        <small id="seriesHelp" class="form-text text-muted">Series. One per line.</small>
     </div>
 </div>
 @if ($record->mat_code == 'r')
