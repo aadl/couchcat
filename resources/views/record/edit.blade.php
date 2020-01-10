@@ -55,6 +55,13 @@
         <small id="seriesHelp" class="form-text text-muted">Series. One per line.</small>
     </div>
 </div>
+<div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
+    <label for="subjects" class="col-sm-2 col-form-label">Subjects</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('subjects', implode("\r\n", ($record->subjects ?? [])), ['id' => 'subjects', 'class' => 'form-control', 'aria-describedby' => 'subjectsHelp', $protect_evg_fields]) }}
+        <small id="subjectsHelp" class="form-text text-muted">Subjects. One per line.</small>
+    </div>
+</div>
 @if ($record->mat_code == 'r')
 <div class="form-group row">
     <label for="documentation" class="col-sm-2 col-form-label">Documentation</label>

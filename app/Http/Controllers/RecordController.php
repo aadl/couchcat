@@ -103,6 +103,11 @@ class RecordController extends Controller
         } else {
             unset($record->series);
         }
+        if (isset($input['subjects'])) {
+            $record->subjects = explode("\r\n", $input['subjects']);
+        } else {
+            unset($record->subjects);
+        }
         if (isset($input['license_slug'])) {
             $record->licensed_from = $input['license_slug'];
         }

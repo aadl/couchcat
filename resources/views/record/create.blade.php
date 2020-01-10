@@ -54,6 +54,13 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="subjects" class="col-sm-2 col-form-label">Subjects</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('subjects', ($record->subjects ?? ''), ['id' => 'subjects', 'class' => 'form-control', 'aria-describedby' => 'subjectsHelp']) }}
+        <small id="subjectsHelp" class="form-text text-muted">Subjects. One per line.</small>
+    </div>
+</div>
+<div class="form-group row">
     <label for="pub_year" class="col-sm-2 col-form-label">Pub Year</label>
     <div class="col-sm-6">
         {{ Form::number('pub_year', null, ['id' => 'pub_year', 'class' => 'form-control', 'aria-describedby' => 'pubYearHelp']) }}
