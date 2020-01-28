@@ -48,14 +48,14 @@
         <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
-<div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
+<div class="form-group row">
     <label for="series" class="col-sm-2 col-form-label">Series</label>
     <div class="col-sm-6">
         {{ Form::textarea('series', implode("\r\n", ($record->series ?? [])), ['id' => 'series', 'class' => 'form-control', 'aria-describedby' => 'seriesHelp', $protect_evg_fields]) }}
         <small id="seriesHelp" class="form-text text-muted">Series. One per line.</small>
     </div>
 </div>
-<div class="form-group row @if ($record->mat_code == 'z' || $record->mat_code == 'za')no-display @endif">
+<div class="form-group row">
     <label for="subjects" class="col-sm-2 col-form-label">Subjects</label>
     <div class="col-sm-6">
         {{ Form::textarea('subjects', implode("\r\n", ($record->subjects ?? [])), ['id' => 'subjects', 'class' => 'form-control', 'aria-describedby' => 'subjectsHelp', $protect_evg_fields]) }}
