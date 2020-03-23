@@ -95,6 +95,13 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="stdnum" class="col-sm-2 col-form-label">ISBN/Standard Number</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('stdnum', implode("\r\n", ($record->stdnum ?? [])), ['id' => 'stdnum', 'class' => 'form-control', 'aria-describedby' => 'stdnumHelp', $protect_evg_fields]) }}
+        <small id="stdnumHelp" class="form-text text-muted">ISBNs. One per line.</small>
+    </div>
+</div>
+<div class="form-group row">
     <label for="cover" class="col-sm-2 col-form-label">Cover Image</label>
     <div class="col-sm-6">
         {{ Form::file('cover', ['id' => 'cover', 'class' => 'form-control', 'aria-describedby' => 'coverHelp']) }}

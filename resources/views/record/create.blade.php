@@ -68,6 +68,13 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="stdnum" class="col-sm-2 col-form-label">ISBN/Standard Number</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('stdnum', null, ['id' => 'stdnum', 'class' => 'form-control', 'aria-describedby' => 'stdnumHelp']) }}
+        <small id="stdnumHelp" class="form-text text-muted">ISBNs. One per line.</small>
+    </div>
+</div>
+<div class="form-group row">
     <label for="cover" class="col-sm-2 col-form-label">Cover Image</label>
     <div class="col-sm-6">
         {{ Form::file('cover', ['id' => 'cover', 'class' => 'form-control', 'aria-describedby' => 'coverHelp']) }}
@@ -84,7 +91,7 @@
 <div class="form-group row">
     <label for="ages" class="col-sm-2 col-form-label">Ages</label>
     <div class="col-sm-6">
-    {{ Form::select('ages[]', ['youth', 'teen', 'adult'], null, ['id' => 'ages', 'multiple' => 'multiple', 'aria-describedby' => 'agesHelp']) }}
+    {{ Form::select('ages[]', ['youth' => 'youth', 'teen' => 'teen', 'adult' => 'adult'], null, ['id' => 'ages', 'multiple' => 'multiple', 'aria-describedby' => 'agesHelp']) }}
     <small id="agesHelp" class="form-text text-muted">Select the age groups that apply to this record.</small>
     </div>
 </div>

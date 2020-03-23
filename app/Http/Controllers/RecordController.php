@@ -117,6 +117,9 @@ class RecordController extends Controller
         if (isset($input['pub_year'])) {
             $record->pub_year = $input['pub_year'];
         }
+        if (isset($input['stdnum'])) {
+            $record->stdnum = explode("\r\n", $input['stdnum']);
+        }
         if (isset($input['notes'])) {
             $record->notes = explode("\r\n", $input['notes']);
         }
