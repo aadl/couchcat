@@ -58,7 +58,7 @@
 <div class="form-group row">
     <label for="subjects" class="col-sm-2 col-form-label">Subjects</label>
     <div class="col-sm-6">
-        {{ Form::textarea('subjects', implode("\r\n", ($record->subjects ?? [])), ['id' => 'subjects', 'class' => 'form-control', 'aria-describedby' => 'subjectsHelp', $protect_evg_fields]) }}
+        {{ Form::textarea('subjects', implode("\r\n", (isset($record->subjects) && $record->subjects != '' ? $record->subjects : [])), ['id' => 'subjects', 'class' => 'form-control', 'aria-describedby' => 'subjectsHelp', $protect_evg_fields]) }}
         <small id="subjectsHelp" class="form-text text-muted">Subjects. One per line.</small>
     </div>
 </div>
