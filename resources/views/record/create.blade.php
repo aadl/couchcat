@@ -81,6 +81,13 @@
         <small id="attachmentHelp" class="form-text text-muted">Attach a file relevant to the record (e.g., a pdf for a book download).</small>
     </div>
 </div>
+<div class="form-group row">
+    <label for="ages" class="col-sm-2 col-form-label">Ages</label>
+    <div class="col-sm-6">
+    {{ Form::select('ages[]', ['youth', 'teen', 'adult'], null, ['id' => 'ages', 'multiple' => 'multiple', 'aria-describedby' => 'agesHelp']) }}
+    <small id="agesHelp" class="form-text text-muted">Select the age groups that apply to this record.</small>
+    </div>
+</div>
 <div class="row form-group">
     <div class="col-sm-6 offset-sm-2">
         <button id="track-add" class="btn btn-secondary">Add Track</button>
