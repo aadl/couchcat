@@ -140,7 +140,7 @@ class RecordController extends Controller
             $record->related_links = explode("\r\n", $input['related_links']);
         }
         if (isset($input['accessories'])) {
-            $record->related_links = explode("\r\n", $input['accessories']);
+            $record->accessories = explode("\r\n", $input['accessories']);
         }
         if (isset($input['ages'])) {
             $record->ages = $input['ages'];
