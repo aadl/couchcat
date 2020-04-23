@@ -86,6 +86,13 @@
         <small id="relatedHelp" class="form-text text-muted">Related items for this record. Format as Title|Link with each line being a related link.</small>
     </div>
 </div>
+<div class="form-group row">
+    <label for="accessories" class="col-sm-2 col-form-label">Accessories</label>
+    <div class="col-sm-6">
+        {{ Form::textarea('accessories', implode("\r\n", ($record->accessories ?? [])), ['id' => 'accessories', 'class' => 'form-control', 'aria-describedby' => 'accessoriesHelp']) }}
+        <small id="relatedHelp" class="form-text text-muted">Accessories for this record. Format as Title|Link with each line being a related link.</small>
+    </div>
+</div>
 @endif
 <div class="form-group row">
     <label for="pub_year" class="col-sm-2 col-form-label">Pub Year</label>
