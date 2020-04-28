@@ -138,9 +138,13 @@ class RecordController extends Controller
         }
         if (isset($input['related_links'])) {
             $record->related_links = explode("\r\n", $input['related_links']);
+        } else {
+            unset($record->related_links);
         }
         if (isset($input['accessories'])) {
             $record->accessories = explode("\r\n", $input['accessories']);
+        } else {
+            unset($record->accessories);
         }
         if (isset($input['ages'])) {
             $record->ages = $input['ages'];
