@@ -98,6 +98,7 @@ class RecordController extends Controller
         if (isset($input['artist'])) {
             $record->artist = $input['artist'];
         }
+        $record->tagline = trim($input['tagline']);
         if (isset($input['series'])) {
             $record->series = explode("\r\n", $input['series']);
         } else {

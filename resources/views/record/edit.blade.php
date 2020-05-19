@@ -41,6 +41,15 @@
         <small id="artistHelp" class="form-text text-muted">Artist.</small>
     </div>
 </div>
+@if ($record->mat_code == 'r')
+<div class="form-group row">
+    <label for="good-for" class="col-sm-2 col-form-label">Tagline</label>
+    <div class="col-sm-6">
+        {{ Form::text('tagline', ($record->tagline ?? ''), ['id' => 'tagline', 'class' => 'form-control', 'aria-describedby' => 'taglineHelp']) }}
+        <small id="taglineHelp" class="form-text text-muted">Tagline for the item like 'Good for audio'. This will display where authors normally are.</small>
+    </div>
+</div>
+@endif
 <div class="form-group row">
     <label for="notes" class="col-sm-2 col-form-label">Summary / Description</label>
     <div class="col-sm-6">
