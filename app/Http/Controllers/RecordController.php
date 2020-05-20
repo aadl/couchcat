@@ -87,7 +87,6 @@ class RecordController extends Controller
         } else {
             $record = $this->couch->getDoc($id);
         }
-
         $record->bib_lastupdate = date('Y-m-d');
         if (isset($input['title'])) {
             $record->title = $input['title'];
@@ -98,7 +97,12 @@ class RecordController extends Controller
         if (isset($input['artist'])) {
             $record->artist = $input['artist'];
         }
-        $record->tagline = trim($input['tagline']);
+        if (isset($input['tagline'])) {
+            $record->tagline = trim($input['tagline']);
+        } else {
+            unset($record->tagline);
+        }
+        
         if (isset($input['series'])) {
             $record->series = explode("\r\n", $input['series']);
         } else {
