@@ -151,6 +151,16 @@ class RecordController extends Controller
         } else {
             unset($record->accessories);
         }
+        if (isset($input['specifications'])) {
+          $record->specifications = explode("\r\n", $input['specifications']);
+        } else {
+          unset($record->specifications);
+        }
+        if (isset($input['casing'])) {
+          $record->casing = explode("\r\n", $input['casing']);
+        } else {
+          unset($record->casing);
+        }
         if (isset($input['ages'])) {
             $record->ages = $input['ages'];
         }
