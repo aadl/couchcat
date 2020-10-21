@@ -106,7 +106,7 @@
     <label for="cat_guide" class="col-sm-2 col-form-label">Specifications</label>
     <div class="col-sm-6">
        {{ Form::textarea('specifications', implode("\r\n", ($record->specifications ?? [])), ['id' => 'specifications', 'class' => 'form-control', 'aria-describedby' => 'specificationsHelp']) }}
-        <small id="relatedHelp" class="form-text text-muted">Specifications for this record - Format as Title|Link with each line being a related link.</small>
+        <small id="relatedHelp" class="form-text text-muted">Specifications for this record - Format as Title|Data, one per line.</small>
     </div>
 </div>
 <div class="form-group row">
