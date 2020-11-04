@@ -57,6 +57,15 @@
         <small id="notesHelp" class="form-text text-muted">A summary / description for displaying on the public catalog.</small>
     </div>
 </div>
+@if ($record->mat_code == 'a')
+<div class="form-group row">
+    <label for="lexile" class="col-sm-2 col-form-label">Lexile</label>
+    <div class="col-sm-6">
+        {{ Form::text('lexile', (isset($record->reading_level) ? $record->reading_level->lexile : ''), ['id' => 'lexile', 'class' => 'form-control', 'aria-describedby' => 'lexileHelp']) }}
+        <small id="lexileHelp" class="form-text text-muted">The lexile reading level.</small>
+    </div>
+</div>
+@endif
 <div class="form-group row">
     <label for="series" class="col-sm-2 col-form-label">Series</label>
     <div class="col-sm-6">
