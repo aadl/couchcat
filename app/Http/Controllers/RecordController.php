@@ -102,6 +102,13 @@ class RecordController extends Controller
         } else {
             unset($record->tagline);
         }
+        if (isset($input['notes'])) {
+            $record->notes = explode("\r\n", $input['notes']);
+        }
+        if (isset($input['lexile'])) {
+            $record->reading_level = $record->reading_level ?? new \stdClass;
+            $record->reading_level->lexile = $input['lexile'];
+        }
         
         if (isset($input['series'])) {
             $record->series = explode("\r\n", $input['series']);
@@ -124,9 +131,6 @@ class RecordController extends Controller
         }
         if (isset($input['stdnum'])) {
             $record->stdnum = explode("\r\n", $input['stdnum']);
-        }
-        if (isset($input['notes'])) {
-            $record->notes = explode("\r\n", $input['notes']);
         }
         $record->active = (isset($input['is_active']) ? 1 : 0);
         $record->flags = $record->flags ?? new \stdClass;
