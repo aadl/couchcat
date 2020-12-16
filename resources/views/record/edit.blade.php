@@ -164,6 +164,8 @@
         <small id="attachmentHelp" class="form-text text-muted">Attach a file relevant to the record (e.g., a pdf for a book download).</small>
     </div>
 </div>
+@endif
+@if (strpos($record->mat_code, 'z') !== false || $record->mat_code == 'r')
 <div class="form-group row">
     <label for="ages" class="col-sm-2 col-form-label">Ages</label>
     <div class="col-sm-6">
